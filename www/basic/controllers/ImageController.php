@@ -36,7 +36,7 @@ class ImageController extends Controller
 
         if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
              $model->link = UploadedFile::getInstance($model, 'link');
-            if ($model->upload()) {
+            if ($model->create()) {
                 // file is uploaded successfully
                 //$model->save();
                 $model->save();
@@ -44,7 +44,7 @@ class ImageController extends Controller
             }
         }
 
-        return $this->render('upload', ['model' => $model]);
+        return $this->render('create', ['model' => $model]);
     }
      public function actionDelete($id)
     {
@@ -52,21 +52,26 @@ class ImageController extends Controller
 
         return $this->redirect(['index']);
     }
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        
+        if ($model->load(Yii::$app->request->post())){
+            $model->link = UploadedFile::getInstance($model, 'link');
+        if($model->create()) {
+            $model->save();
+            return $this->redirect(['index']);
+        }} else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
     protected function findModel($id)
     {
-        if (($model = Videos::findOne($id)) !== null) {
+        if (($model = Images::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

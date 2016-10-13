@@ -17,13 +17,12 @@ class Images extends \yii\db\ActiveRecord
     {
         return [[['name'],'required'],
             [['link'],'default','value'=>""],
-            //[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['link'], 'file', 'extensions' => ['png', 'jpg', 'gif','jpeg']],
         
         ];
     }
 
-    public function upload()
+    public function create()
     {
         if ($this->validate()) {
             $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
