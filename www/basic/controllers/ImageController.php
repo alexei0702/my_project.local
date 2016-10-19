@@ -77,19 +77,6 @@ class ImageController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return render('index');
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }         
+    
 }
 ?>

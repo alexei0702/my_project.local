@@ -1,16 +1,26 @@
 <?php
 
 namespace app\models;
+use yii\db\ActiveRecord;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
+   
     public $authKey;
     public $accessToken;
+    
+    public static function tableName()
+    {
+        return 'user';
+    }
 
-    private static $users = [
+    public function rules()
+    {
+        return [[['username','password'],'required'],
+        ];
+    }
+
+   /* private static $users = [
         '100' => [
             'id' => '100',
             'username' => 'admin',
@@ -25,15 +35,14 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],
-    ];
-
+    ];*/
 
     /**
      * @inheritdoc
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return User::findOne($id);
     }
 
     /**
@@ -53,7 +62,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     /**
      * Finds user by username
      *
-     * @param string $username
+     * @param  string      $username
      * @return static|null
      */
     public static function findByUsername($username)
@@ -94,11 +103,21 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     /**
      * Validates password
      *
-     * @param string $password password to validate
+     * @param  string  $password password to validate
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
     {
         return $this->password === $password;
     }
+    /*public function setNewUser(){
+        /**
+        * функция заполняет для нового пользователя атрибуты Логин и Пароль, в качестве пароля задаётся стандартный
+        
+        $standardPass="studiopass";
+        $login="studioLogin".(User::find()->count()+1);
+        $this->username=$login;
+        $this->password=$standardPass;
+        $this->status_id=3;        
+    }*/
 }

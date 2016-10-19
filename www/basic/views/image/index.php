@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
-$this->title = 'Images';
+$this->title = 'Image';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -5,8 +5,6 @@ use yii\db\ActiveRecord;
 
 class Graf extends ActiveRecord
 {
-
-
 }
 
 ?>
