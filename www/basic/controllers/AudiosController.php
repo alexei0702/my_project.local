@@ -17,15 +17,34 @@ class AudiosController extends Controller
      * @inheritdoc
      */
     public function behaviors() { 
+        $session = Yii::$app->session;
+        $session->open();
         return 
         [ 
         'access' => [ 'class' => AccessControl::className(), 
         'rules' => 
         [ 
-        [ 'actions' => [], 
+        [ 'actions' => ['index','create','view'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
+        [   'actions' => ['update','delete'], 
+        'allow' => true,
+        'matchCallback' => function ($rule, $action) {
+                            $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
+                            if($status==1)
+                                return true;    
+                            else{
+                                $id_us = Yii::$app->user->id;
+                                $id_m = Yii::$app->request->get('id');
+                                $id = Audios::find()->where(['id' => $id_m])->one();
+                                if($id['author']==$id_us)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                        }
+        ],
         ], 
         ], 
         ]; 
@@ -66,7 +85,7 @@ class AudiosController extends Controller
     public function actionCreate()
     {
         $model = new Audios();
-
+        $model->author = Yii::$app->user->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

@@ -26,7 +26,7 @@ class AuthController extends Controller
          'roles' => ['?'], 
          ],
 
-        [ 'actions' => ['Logout','index'], 
+        [ 'actions' => ['logout','index'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
@@ -97,7 +97,7 @@ class AuthController extends Controller
             {                    
                 Yii::$app->user->login($user);
                 $_SESSION['status']=$user['status'];
-                return $this->redirect(['index']);
+                return $this->goBack();
             }
             else
             {

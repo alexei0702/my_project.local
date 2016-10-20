@@ -12,15 +12,34 @@ use yii\filters\VerbFilter;
 class ImageController extends Controller
 {
     public function behaviors() { 
+        $session = Yii::$app->session;
+        $session->open();
         return 
         [ 
         'access' => [ 'class' => AccessControl::className(), 
         'rules' => 
         [ 
-        [ 'actions' => [], 
+        [ 'actions' => ['index','create'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
+        [   'actions' => ['update','delete'], 
+        'allow' => true,
+        'matchCallback' => function ($rule, $action) {
+                            $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
+                            if($status==1)
+                                return true;    
+                            else{
+                                $id_us = Yii::$app->user->id;
+                                $id_m = Yii::$app->request->get('id');
+                                $id = Images::find()->where(['id' => $id_m])->one();
+                                if($id['author']==$id_us)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                        }
+        ],
         ], 
         ], 
         ]; 
@@ -41,12 +60,9 @@ class ImageController extends Controller
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-
-        $status = $_SESSION['status'];
-        return $this->render('index', [
+       return $this->render('index', [
             'images' => $images,
             'pagination' => $pagination,
-            'status'=>$status,
         ]);
     }
 
@@ -54,7 +70,7 @@ class ImageController extends Controller
     public function actionCreate()
     {
         $model = new Images();
-
+        $model->author = Yii::$app->user->id;
         if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
              $model->link = UploadedFile::getInstance($model, 'link');
             if ($model->create()) {
