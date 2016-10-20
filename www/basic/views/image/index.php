@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <thead>
 <tr>
 <th>#</th>
-<th>Name</th>
+<th>Name:</th>
 <th>Link</th>
 <th>Action</th>
 </tr>

@@ -7,8 +7,7 @@ use app\models\Audios;
 use app\models\AudiosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * AudiosController implements the CRUD actions for Audios model.
  */
@@ -17,16 +16,19 @@ class AudiosController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+    public function behaviors() { 
+        return 
+        [ 
+        'access' => [ 'class' => AccessControl::className(), 
+        'rules' => 
+        [ 
+        [ 'actions' => [], 
+        'allow' => true, 
+        'roles' => ['@'], 
+        ], 
+        ], 
+        ], 
+        ]; 
     }
 
     /**

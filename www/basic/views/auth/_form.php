@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 <?php $form = ActiveForm::begin() ?>
 	<?= $form->field($user, 'username')->textInput() ?>
 	
-    <?= $form->field($user, 'password')->textInput() ?>
+    <?= $form->field($user, 'password')->passwordInput() ?>
 
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
 

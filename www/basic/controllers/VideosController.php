@@ -8,7 +8,7 @@ use app\models\VideosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * VideosController implements the CRUD actions for Videos model.
  */
@@ -17,17 +17,21 @@ class VideosController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        public function behaviors() { 
+        return 
+        [ 
+        'access' => [ 'class' => AccessControl::className(), 
+        'rules' => 
+        [ 
+        [ 'actions' => [], 
+        'allow' => true, 
+        'roles' => ['@'], 
+        ], 
+        ], 
+        ], 
+        ]; 
     }
+
 
     /**
      * Lists all Videos models.

@@ -7,8 +7,27 @@ use yii\web\Controller;
 use app\models\Images;
 use yii\web\UploadedFile;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 class ImageController extends Controller
 {
+    public function behaviors() { 
+        return 
+        [ 
+        'access' => [ 'class' => AccessControl::className(), 
+        'rules' => 
+        [ 
+        [ 'actions' => [], 
+        'allow' => true, 
+        'roles' => ['@'], 
+        ], 
+        ], 
+        ], 
+        ]; 
+    }
+
+
+
      public function actionIndex()
     {
         $query = Images::find();
@@ -23,9 +42,11 @@ class ImageController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+        $status = $_SESSION['status'];
         return $this->render('index', [
             'images' => $images,
             'pagination' => $pagination,
+            'status'=>$status,
         ]);
     }
 

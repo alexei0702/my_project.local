@@ -13,29 +13,38 @@ class AuthController extends Controller
     /**
      * @inheritdoc
      */
-   /* public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+    public function behaviors() { 
+        $session = Yii::$app->session;
+        $session->open();
+        return 
+        [ 
+        'access' => [ 'class' => AccessControl::className(), 
+        'rules' => 
+        [ 
+         [ 'allow' => true, 
+         'actions' => ['login'], 
+         'roles' => ['?'], 
+         ],
+
+        [ 'actions' => ['Logout','index'], 
+        'allow' => true, 
+        'roles' => ['@'], 
+        ], 
+        [   'actions' => ['register'], 
+        'allow' => true,
+        'matchCallback' => function ($rule, $action) {
+                            $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
+                            if($status==1)
+                                return true;
+                            else
+                                return false;
+
+                        }
+        ],
+        ], 
+        ], 
+        ]; 
     }
-*/
     /**
      * @inheritdoc
      */
@@ -56,20 +65,6 @@ class AuthController extends Controller
      *
      * @return string
      */
-    /*public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return render('image\index');
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    } */
     //** регистрация нового user'а **//
     public function actionRegister()
     {
@@ -101,6 +96,7 @@ class AuthController extends Controller
             if($user)
             {                    
                 Yii::$app->user->login($user);
+                $_SESSION['status']=$user['status'];
                 return $this->redirect(['index']);
             }
             else
