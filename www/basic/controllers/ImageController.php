@@ -93,10 +93,14 @@ class ImageController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
+        $model_l=$model->link;
         if ($model->load(Yii::$app->request->post())){
-            $model->link = UploadedFile::getInstance($model, 'link');
-        if($model->create()) {
+            $link = UploadedFile::getInstance($model, 'link');
+            if($link!=null)
+                $model->link=$link;
+            else
+                $model->link=$model_l;
+        if($model->updateImage()) {
             $model->save();
             return $this->redirect(['index']);
         }} else {

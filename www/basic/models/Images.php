@@ -32,6 +32,24 @@ class Images extends \yii\db\ActiveRecord
         } else {
             return false;
         }
-    }   
+    }  
+
+    public function updateImage ()
+    {
+        if ($this->validate()) {
+            if(is_string($this->link)){
+                return true;
+            }
+            else{
+            $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
+            $this->link=time()."_".$this->link->baseName . '.' . $this->link->extension;
+            /*chmod($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension,0755);*/
+            return true;
+        }
+        } else {
+            return false;
+        }
+    }    
+
 }
 ?>
