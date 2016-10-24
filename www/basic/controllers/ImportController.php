@@ -12,18 +12,8 @@ if ($handle) {
 while (($buffer = fgets($handle)) !== false) {
 $row = explode(';', $buffer);
 $row1 = new Graf();
-$row1['category'] = $row [1];
-$row1['type_org'] = $row [2]; 
-$row1['name_org'] = $row [3]; 
-$row1['name_file'] = $row [4]; 
-$row1['messege_text'] = $row [5]; 
-$row1['add_info'] = $row [6]; 
-$row1['place'] = $row [7]; 
-$row1['type_ban'] = $row [8]; 
-$row1['size'] = $row [9]; 
-$row1['main_color'] = $row [10]; 
-$row1['ad_rating'] = $row [11]; 
-$row1['ad_valuer'] = $row [12];  
+$row1['username'] = $row [0];
+$row1['password'] = $row [1]; 
 $row1->save();
 //теперь $buffer - очередная строка
 } 
