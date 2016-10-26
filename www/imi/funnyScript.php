@@ -1,3 +1,7 @@
+<?php
+session_start();
+$_SESSION['audID']=$_GET['audID'];
+?>
 <html>
 	<head>
 		<meta charset="utf-8">
