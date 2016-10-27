@@ -3,7 +3,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
-class Students extends ActiveRecord
+class vimiUser extends ActiveRecord
 {
 }
 
