@@ -23,7 +23,7 @@
 }
 else
 {
-	header("Location:staronline.php?messege=Incorrect auditory&audNum=".$aud_num); 
+	header("Location:staronline.php?messege=Incorrect auditory"); 
 }
 }
 	else{
