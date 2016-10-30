@@ -1,8 +1,5 @@
-
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
 <?php
+require_once ('header.php');
 $dbh = new PDO("mysql:host=localhost;dbname=vimi", "root", "");
         $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); 
         $dbh->prepare("set character_set_client='utf8'")->execute(); 
@@ -12,9 +9,9 @@ $stud = $dbh->prepare("SELECT * FROM vimi_aud_user_connect");
 $stud->execute();
 echo "<div class='container'>";
 echo "<h1>"."All Students!"."</h1>";
-echo "<table class='table table-striped table-bordered'>";
+echo "<table class='table table-striped table-hover'>";
 echo "<thead>";
-	echo "<tr>";
+	echo "<tr class='danger'>";
 	echo "<th>"."#"."</th>";
 	echo "<th>"."FIO"."</th>";
 	echo "<th>"."Auditory"."</th>";
@@ -40,8 +37,5 @@ while($row=$stud->fetch()){
 }
 echo "</table>";
 echo "</div>";
+require_once ('footer.php');
 ?>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>

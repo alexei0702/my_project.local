@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Окт 27 2016 г., 15:35
--- Версия сервера: 10.1.16-MariaDB
--- Версия PHP: 5.6.24
+-- Время создания: Окт 30 2016 г., 14:50
+-- Версия сервера: 10.1.13-MariaDB
+-- Версия PHP: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -36,7 +36,8 @@ CREATE TABLE `vimi_aud` (
 --
 
 INSERT INTO `vimi_aud` (`aud_id`, `aud_num`) VALUES
-(1, '1110');
+(1, '1110'),
+(2, '1209');
 
 -- --------------------------------------------------------
 
@@ -50,6 +51,15 @@ CREATE TABLE `vimi_aud_user_connect` (
   `aud_id` int(11) NOT NULL,
   `connect_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `vimi_aud_user_connect`
+--
+
+INSERT INTO `vimi_aud_user_connect` (`connect_id`, `user_id`, `aud_id`, `connect_time`) VALUES
+(27, 1, 1, '2016-10-30 10:17:55'),
+(28, 27, 1, '2016-10-30 10:19:40'),
+(29, 8, 2, '2016-10-30 14:23:29');
 
 -- --------------------------------------------------------
 
@@ -127,12 +137,12 @@ ALTER TABLE `vimi_user`
 -- AUTO_INCREMENT для таблицы `vimi_aud`
 --
 ALTER TABLE `vimi_aud`
-  MODIFY `aud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `aud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `vimi_aud_user_connect`
 --
 ALTER TABLE `vimi_aud_user_connect`
-  MODIFY `connect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `connect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT для таблицы `vimi_user`
 --
