@@ -21,12 +21,7 @@ require_once ('header.php');
         </h2>
         <br>
         <?php
-        $dbh = new PDO("mysql:host=localhost;dbname=vimi", "root", "");
-        $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); 
-        $dbh->prepare("set character_set_client='utf8'")->execute(); 
-        $dbh->prepare("set character_set_results='utf8'")->execute(); 
-        $dbh->prepare("set collation_connection='utf8_general_ci'")->execute();
-        $students=$dbh->prepare("SELECT * FROM vimi_user");
+        $students=$DBH->prepare("SELECT * FROM vimi_user");
         $students->execute();
         ?>
         <form class="center form" action="staronlineprocessor.php" method="POST"> 

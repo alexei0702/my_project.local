@@ -1,8 +1,16 @@
-<!--MAIN END-->
-	<!--FOOTER BEGIN-->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<footer class="footer">
+	 <div class="container" style="padding-top:10px;">
+   <h4>
+   <p class="text-muted">
+   <div class="comp"> 
+   By Little SPOT  -_-
+   </div>
+        </p>
+        </h4>
+      </div>
+</footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

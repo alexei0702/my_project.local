@@ -1,3 +1,10 @@
+<?php
+	$DBH = new PDO("mysql:host=localhost;dbname=vimi", "root", "");
+	$DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); 
+    $DBH->prepare("set character_set_client='utf8'")->execute(); 
+    $DBH->prepare("set character_set_results='utf8'")->execute(); 
+    $DBH->prepare("set collation_connection='utf8_general_ci'")->execute();
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -10,6 +17,21 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+.footer {
+ position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+
+}
+.comp
+{
+  text-align: right;
+}
+</style>
 </head>
 <body>
 	<!--Навигационная лента-->	
