@@ -31,6 +31,9 @@
 {
   text-align: right;
 }
+.center{  
+          text-align: center;
+        }
 </style>
 </head>
 <body>

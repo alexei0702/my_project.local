@@ -7,20 +7,11 @@
 	$Null->execute();
 	$row=$Null->fetch();
 	if($row['user_count']==1){ 
-		$aud_id=$DBH->prepare("SELECT aud_id FROM vimi_aud WHERE aud_num='".$aud_num."'");
-		$aud_id->execute();
-		$audID=$aud_id->fetch();
-		if($audID['aud_id']!=0){	
 		//залогинился - записываем в базу
 		$date = date('y-m-d H-i-s');
 		$Null = $DBH->prepare("INSERT INTO vimi_aud_user_connect (user_id, aud_id, connect_time) VALUES ('".$login."','".$audID['aud_id']."', '".$date."')");
 		$Null->execute();
 		header("Location:success.php?aud=".$aud_num."&userId=".$login);
-}
-else
-{
-	header("Location:audChoose.php"); 
-}
 }
 	else{
 		header("Location:staronline.php?messege=Incorrect password&audNum=".$aud_num); 
