@@ -1,6 +1,14 @@
 <?php
 require_once ('header.php');
-
+$aud_id=$DBH->prepare("SELECT aud_id FROM vimi_aud WHERE aud_num='".$_GET['audNum']."'");
+    $aud_id->execute();
+    $audID=$aud_id->fetch();
+if(isset($_POST['aud_num']))
+  header("Location:staronline.php?audNum=".$_POST['aud_num']); 
+if(!(isset($_GET['audNum']))||$audID['aud_id']==0)
+{
+  header("Location:audChoose.php");
+}
 ?>
       <style>
         .center{  
