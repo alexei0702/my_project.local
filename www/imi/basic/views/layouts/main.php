@@ -37,7 +37,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Views', 'url' => ['/vimi/views']],
-            Yii::$app->user->isGuest ? (
+            /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/auth/login']]
             ) : (
                 '<li>'
@@ -48,7 +48,7 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            )*/
         ],
     ]);
     NavBar::end();

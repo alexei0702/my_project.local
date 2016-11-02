@@ -20,6 +20,7 @@ foreach ($aud as $aud):
  ?>
 </select>
 </div>
+<input type="hidden" name="11" value="11">
 <div class="col-md-6">
 <div class="form-group">
         <button class="btn btn-lg btn-primary" type="submit">Перейти к аудитории <span class="glyphicon glyphicon-arrow-right"></span></button>

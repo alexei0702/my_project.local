@@ -45,6 +45,20 @@ class VimiController extends Controller
         ], 
         ]; 
     }*/
+
+    public function actionIndex()
+    {
+
+        $aud_id=Vimi_aud::find(['aud_id'])->where(['aud_num'=>@$_GET['audNum']])->one();
+
+        if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
+        {
+          return $this->Choose();
+        }
+        if(isset($_POST['aud_num']))
+            echo 111;
+    }
+
     public function actionViews()
     {
     	$query= Vimi_aud_user_connect::find();
@@ -65,14 +79,19 @@ class VimiController extends Controller
         ]);
     }
 
-    public function actionChoose()
+    public function Choose()
     {
+        $model = new Vimi_aud();
     	$aud = Vimi_aud::find()->all();
-    	return $this->render('choose', [
+    	/*return $this->render('choose', [
             'aud' => $aud,
-        ]);
+        ]);*/
+        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
+
+                echo 1111;//return $this->redirect(['index']);
+            }
+        return $this->render('choose', ['aud' => $aud,'model' => $model]);
     }
-
-
+    
 }
 ?>
