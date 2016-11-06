@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\Vimi_aud_user_connect;
 use app\models\Vimi_user;
 use app\models\Vimi_aud;
+use app\models\Lesson;
 class VimiController extends Controller
 {
 	/*public function behaviors() { 
@@ -49,14 +50,16 @@ class VimiController extends Controller
     public function actionIndex()
     {
 
-        $aud_id=Vimi_aud::find(['aud_id'])->where(['aud_num'=>@$_GET['audNum']])->one();
+        /*$aud_id=Vimi_aud::find(['aud_id'])->where(['aud_num'=>@$_GET['audNum']])->one();
 
         if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
         {
           return $this->Choose();
         }
         if(isset($_POST['aud_num']))
-            echo 111;
+            echo 111;*/
+            $les=lesson::find()->one();
+            echo $les['title'];
     }
 
     public function actionViews()
@@ -90,8 +93,20 @@ class VimiController extends Controller
 
                 echo 1111;//return $this->redirect(['index']);
             }
-        return $this->render('choose', ['aud' => $aud,'model' => $model]);
+        return $this->render('choose', ['model' => $model]);
     }
-    
+
+
+    public function actionLesson_create()
+    {
+        $model = new Lesson();
+        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) 
+        {              
+                $model->save();
+                echo 1111;
+                //return $this->redirect(['index']);          
+        }
+    return $this->render('createLesson', ['model' => $model]);
+    }
 }
 ?>
