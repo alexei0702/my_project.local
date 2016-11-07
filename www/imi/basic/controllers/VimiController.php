@@ -51,29 +51,13 @@ class VimiController extends Controller
 
     public function actionIndex()
     {
-       
-        
 
         $aud_id=Vimi_aud::find(['aud_id'])->where(['aud_num'=>@$_GET['audNum']])->one();
-//$aud_num=Yii::$app->request->post("Vimi_aud[aud_num]");
-$model = new Vimi_aud();
-$model->load(Yii::$app->request->post());
-print_r($model);
-    $aud_num=$model->aud_num;
-    echo $aud_num;
-                //return $this->redirect(['index&audNum='.$aud_num]);
-//echo $aud_num." AUD";
-              /*if ($aud_num){
-                    echo $aud_num;
-                }
-else
-        */if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
+    if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
         {
-          return $this->Choose();
+           return $this->Choose();
         }
-
-        //print_r(Yii::$app->request);
-        //echo "Good Job";
+        echo "Good Job";
     }
 
 
@@ -100,12 +84,16 @@ else
     {
         $model = new Vimi_aud();
     	if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
-                $aud_num=Yii::$app->request->post("aud_num");
-                //return $this->redirect(['index&audNum='.$aud_num]);
-                echo $aud_num;
+                $aud_num=Yii::$app->request->post('Vimi_aud');
+                $aud_num=$aud_num['aud_num'];
+                return $this->redirect('index.php?r=vimi&audNum='.$aud_num);
             }
-        return $this->render('choose', ['model' => $model]);
+            
+            else{
+                    return $this->render('choose', ['model' => $model]);
+                }
     }
+
 
 
 
@@ -115,8 +103,6 @@ else
         $model=new Lesson();
         if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
         {
-           // echo "<br><br><br><br><br>";
-           //print_r($model);
             $model->save();
             return $this->redirect(['index']);
         }
@@ -134,9 +120,5 @@ else
         }
         return $this->render('teacher', ['model' => $model]);
     }
-
-
-    
-
 }
 ?>

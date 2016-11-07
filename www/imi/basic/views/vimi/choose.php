@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 <?php $form = ActiveForm::begin(); ?>
 <?php
     $aud = Vimi_aud::find()->all();
-// формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+
     $items = ArrayHelper::map($aud,'aud_num','aud_num');
     $params = [
         'prompt' => 'Выберите Аудиторию'
