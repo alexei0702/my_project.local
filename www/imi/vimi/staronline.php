@@ -10,11 +10,6 @@ if(!(isset($_GET['audNum']))||$audID['aud_id']==0)
 if(isset($_POST['aud_num']))
   header("Location:staronline.php?audNum=".$_POST['aud_num']);
 ?>
-      <style>
-        .center{  
-          text-align: center;
-        }
-      </style>
 	
 <div class="container">
 

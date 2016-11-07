@@ -12,6 +12,7 @@ use app\models\Vimi_user;
 use app\models\Vimi_aud;
 use app\models\Lesson;
 use app\models\Teacher;
+
 class VimiController extends Controller
 {
 	/*public function behaviors() { 
@@ -47,16 +48,35 @@ class VimiController extends Controller
         ], 
         ]; 
     }*/
-      public function actionIndex()
+
+    public function actionIndex()
     {
+       
+        
+
         $aud_id=Vimi_aud::find(['aud_id'])->where(['aud_num'=>@$_GET['audNum']])->one();
-        if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
+//$aud_num=Yii::$app->request->post("Vimi_aud[aud_num]");
+$model = new Vimi_aud();
+$model->load(Yii::$app->request->post());
+print_r($model);
+    $aud_num=$model->aud_num;
+    echo $aud_num;
+                //return $this->redirect(['index&audNum='.$aud_num]);
+//echo $aud_num." AUD";
+              /*if ($aud_num){
+                    echo $aud_num;
+                }
+else
+        */if(!(isset($_GET['audNum']))||$aud_id['aud_id']==0)
         {
           return $this->Choose();
         }
-        if(isset($_POST['aud_num']))
-            echo 111;
+
+        //print_r(Yii::$app->request);
+        //echo "Good Job";
     }
+
+
     public function actionViews()
     {
         $query= Vimi_aud_user_connect::find();
@@ -73,15 +93,16 @@ class VimiController extends Controller
             'pagination' => $pagination,
         ]);
     }
+
+    
+
     public function Choose()
     {
         $model = new Vimi_aud();
-        $aud = Vimi_aud::find()->all();
-        /*return $this->render('choose', [
-            'aud' => $aud,
-        ]);*/
-        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
-                echo 1111;//return $this->redirect(['index']);
+    	if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post())) {
+                $aud_num=Yii::$app->request->post("aud_num");
+                //return $this->redirect(['index&audNum='.$aud_num]);
+                echo $aud_num;
             }
         return $this->render('choose', ['model' => $model]);
     }
@@ -113,6 +134,9 @@ class VimiController extends Controller
         }
         return $this->render('teacher', ['model' => $model]);
     }
+
+
+    
 
 }
 ?>

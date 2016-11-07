@@ -2,28 +2,20 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\widgets\ActiveForm;
-$this->title = 'Auditory';
-$this->params['breadcrumbs'][] = $this->title;
+use app\models\Vimi_aud;
+use yii\helpers\ArrayHelper;
 ?>
-<?php $form = ActiveForm::begin(); ?>
 <h1>Auditory list:</h1>
-<div class="container">
-<div class="col-md-6">
-<select name="aud_num" class="form-control">
-<option>Выбери аудиторию</option> 
-<?php 
-foreach ($aud as $aud): 
+<?php $form = ActiveForm::begin(); ?>
+<?php
+    $aud = Vimi_aud::find()->all();
+// формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+    $items = ArrayHelper::map($aud,'aud_num','aud_num');
+    $params = [
+        'prompt' => 'Выберите Аудиторию'
+    ];
+    echo $form->field($model, 'aud_num')->dropDownList($items,$params);
 ?>
-<option value="<?= $aud->aud_id?>"><?= Html::encode ("{$aud->aud_num}	") ?></option>
-<?php 
- endforeach;
- ?>
-</select>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-        <button class="btn btn-lg btn-primary" type="submit">Перейти к аудитории <span class="glyphicon glyphicon-arrow-right"></span></button>
-    </div>
-   </div>
-</div>
+<?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
+
 <?php ActiveForm::end(); ?>
