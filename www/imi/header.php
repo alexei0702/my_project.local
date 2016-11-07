@@ -1,5 +1,5 @@
 <?php
-	$DBH = new PDO("mysql:host=localhost;dbname=vimi", "root", "");
+	$DBH = new PDO("mysql:host=localhost;dbname=vimi.bsu.ru", "vimi.bsu.ru", "vHW7RKhAX3");
 	$DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); 
     $DBH->prepare("set character_set_client='utf8'")->execute(); 
     $DBH->prepare("set character_set_results='utf8'")->execute(); 
@@ -45,7 +45,7 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-				  <li role="presentation"><a href="http://my_project.local/imi/views.php">Views</a></li>
+				  <li role="presentation"><a href="views.php">Views</a></li>
 				</ul>
 			</div>			
 		</div>		

@@ -8,6 +8,9 @@
 	$row=$Null->fetch();
 	if($row['user_count']==1){ 
 		//залогинился - записываем в базу
+		$aud_id=$DBH->prepare("SELECT aud_id FROM vimi_aud WHERE aud_num='".$aud_num."'");
+   		$aud_id->execute();
+    	$audID=$aud_id->fetch();
 		$date = date('y-m-d H-i-s');
 		$Null = $DBH->prepare("INSERT INTO vimi_aud_user_connect (user_id, aud_id, connect_time) VALUES ('".$login."','".$audID['aud_id']."', '".$date."')");
 		$Null->execute();
