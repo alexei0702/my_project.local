@@ -3,12 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 use yii\web\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use app\models\Vimi_aud_user_connect;
-use app\models\Vimi_user;
+use app\models\VimiUser;
 use app\models\Vimi_aud;
 use app\models\Lesson;
 use app\models\Teacher;
@@ -57,11 +57,11 @@ class VimiController extends Controller
         {
            return $this->Choose();
         }
-        echo "Good Job";
+        return $this->actionLogin();
     }
 
 
-    public function actionViews()
+    /*public function actionViews()
     {
         $query= Vimi_aud_user_connect::find();
         $pagination = new Pagination([
@@ -77,7 +77,7 @@ class VimiController extends Controller
             'pagination' => $pagination,
         ]);
     }
-
+*/
     
 
     public function Choose()
@@ -94,6 +94,31 @@ class VimiController extends Controller
                 }
     }
 
+
+    public function actionLogin()
+        {
+            $user = new VimiUser();            
+            
+            if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
+            {
+                $user = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
+            if($user)
+                {                    
+                    Yii::$app->user->login($user);
+                    $_SESSION['status']=$user['status'];
+                    return $this->goBack();
+                }
+                else
+                {
+                    throw new NotFoundHttpException('Incorrect login or password.');
+                }
+                
+            }
+
+            
+        return $this->render('auth', ['user' => $user]);
+
+        }              
 
 
 
