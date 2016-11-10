@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\Connection; 
+use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
 use yii\data\Pagination;
@@ -12,6 +14,8 @@ use app\models\VimiUser;
 use app\models\Vimi_aud;
 use app\models\Lesson;
 use app\models\Teacher;
+use app\models\Groups;
+use app\models\Students;
 
 class VimiController extends Controller
 {
@@ -101,13 +105,18 @@ class VimiController extends Controller
             
             if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
             {
-                $user = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
-            if($user)
+                $user1 = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
+            if($user1)
                 {                    
                     Yii::$app->user->login($user);
-                    $_SESSION['status']=$user['status'];
+                    $student_id = Students::find()->where(['user_id'=>$user->user_id])->one();
+                    $aud_id = Vimi_aud::find()->where(['aud_num'=>$_GET['audNum']])->one();
+                    $db=Yii::$app->db; 
+                    $date = date('y:m:d H:i:s');
+                    $db->createCommand('INSERT INTO visit_connect(student_id,aud_id,date_visiting) VALUES ('.$student_id['students_id'].','.$aud_id['aud_id'].','.$date.')')->execute();
                     return $this->goBack();
-                }
+
+            }
                 else
                 {
                     throw new NotFoundHttpException('Incorrect login or password.');
@@ -144,6 +153,30 @@ class VimiController extends Controller
             return $this->redirect(['index']);
         }
         return $this->render('teacher', ['model' => $model]);
+    }
+
+    /* создание групп*/ 
+    public function actionGroups()
+    {
+        $model=new Groups();
+        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
+        {
+            $model->save();
+            return $this->redirect(['index']);
+        }
+        return $this->render('groups', ['model' => $model]);
+    }
+
+    /* Создание студента */
+    public function actionStudents()
+    {
+        $model=new Students();
+        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
+        {
+            $model->save();
+            return $this->redirect(['index']);
+        }
+        return $this->render('students', ['model' => $model]);
     }
 }
 ?>
