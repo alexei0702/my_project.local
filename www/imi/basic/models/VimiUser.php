@@ -13,7 +13,7 @@ class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
     public static function findIdentity($id)
     {
-        return User::findOne($id);
+        return VimiUser::findOne($id);
     }
 
     /**

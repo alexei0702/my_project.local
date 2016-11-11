@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 10 2016 г., 13:39
+-- Время создания: Ноя 11 2016 г., 12:51
 -- Версия сервера: 10.1.16-MariaDB
 -- Версия PHP: 5.6.24
 
@@ -75,15 +75,16 @@ CREATE TABLE `pair` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `shledure`
+-- Структура таблицы `schedule`
 --
 
-CREATE TABLE `shledure` (
-  `shledure_id` int(11) NOT NULL,
+CREATE TABLE `schedule` (
+  `schedule_id` int(11) NOT NULL,
   `week_num` int(11) DEFAULT NULL,
   `lesson_id` int(11) DEFAULT NULL,
   `pair_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL
+  `group_id` int(11) DEFAULT NULL,
+  `day` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -118,17 +119,18 @@ CREATE TABLE `teacher` (
   `teacher_id` int(11) NOT NULL,
   `Name` varchar(45) DEFAULT NULL,
   `Secondname` varchar(45) DEFAULT NULL,
-  `Patronymic` varchar(45) DEFAULT NULL
+  `Patronymic` varchar(45) DEFAULT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `teacher`
 --
 
-INSERT INTO `teacher` (`teacher_id`, `Name`, `Secondname`, `Patronymic`) VALUES
-(1, 'Игорь', 'Юмов', 'Бимбаевич'),
-(2, 'Юрий', 'Нефедов', 'Юрьевич'),
-(3, 'Баир', 'Хабитуев', 'Викторович');
+INSERT INTO `teacher` (`teacher_id`, `Name`, `Secondname`, `Patronymic`, `user_id`) VALUES
+(1, 'Игорь', 'Юмов', 'Бимбаевич', 0),
+(2, 'Юрий', 'Нефедов', 'Юрьевич', 0),
+(3, 'Баир', 'Хабитуев', 'Викторович', 0);
 
 -- --------------------------------------------------------
 
@@ -178,7 +180,7 @@ INSERT INTO `vimi_aud` (`aud_id`, `aud_num`) VALUES
 
 CREATE TABLE `vimi_user` (
   `user_id` int(11) NOT NULL,
-  `user_fio` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `user_password` varchar(45) NOT NULL,
   `user_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -187,7 +189,7 @@ CREATE TABLE `vimi_user` (
 -- Дамп данных таблицы `vimi_user`
 --
 
-INSERT INTO `vimi_user` (`user_id`, `user_fio`, `user_password`, `user_status`) VALUES
+INSERT INTO `vimi_user` (`user_id`, `username`, `user_password`, `user_status`) VALUES
 (1, 'Шиханов Дмитрий Сергеевич', '1234', 1),
 (2, 'Серебрюхов Дмитрий Николаевич', '1234', 1),
 (3, '﻿Аюшеева Иннеса Аюровна\r\n', '98989', 1),
@@ -249,7 +251,7 @@ CREATE TABLE `visit_connect` (
 --
 
 INSERT INTO `visit_connect` (`connect_id`, `student_id`, `aud_id`, `date_visiting`) VALUES
-(0, 1, 9, '0000-00-00 00:00:00');
+(1, 1, 4, '2016-11-11 09:50:23');
 
 -- --------------------------------------------------------
 
@@ -286,10 +288,10 @@ ALTER TABLE `pair`
   ADD PRIMARY KEY (`pair_id`);
 
 --
--- Индексы таблицы `shledure`
+-- Индексы таблицы `schedule`
 --
-ALTER TABLE `shledure`
-  ADD PRIMARY KEY (`shledure_id`),
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`schedule_id`),
   ADD KEY `pair_id_idx` (`pair_id`),
   ADD KEY `lesson_id_idx` (`lesson_id`);
 
@@ -327,6 +329,12 @@ ALTER TABLE `visiting`
   ADD KEY `student_id_idx` (`student_id`);
 
 --
+-- Индексы таблицы `visit_connect`
+--
+ALTER TABLE `visit_connect`
+  ADD PRIMARY KEY (`connect_id`);
+
+--
 -- Индексы таблицы `visit_status`
 --
 ALTER TABLE `visit_status`
@@ -352,10 +360,10 @@ ALTER TABLE `lesson`
 ALTER TABLE `pair`
   MODIFY `pair_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT для таблицы `shledure`
+-- AUTO_INCREMENT для таблицы `schedule`
 --
-ALTER TABLE `shledure`
-  MODIFY `shledure_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `schedule`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `students`
 --
@@ -381,6 +389,11 @@ ALTER TABLE `vimi_user`
 --
 ALTER TABLE `visiting`
   MODIFY `visiting_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `visit_connect`
+--
+ALTER TABLE `visit_connect`
+  MODIFY `connect_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `visit_status`
 --
