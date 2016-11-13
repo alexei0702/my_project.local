@@ -5,8 +5,8 @@ use app\models\Teacher;
 use yii\helpers\ArrayHelper;
 ?>
 <?php $form = ActiveForm::begin() ?>
-	<?= $form->field($model, 'title')->textInput()->label('Название') ?>
-	
+    <?= $form->field($model, 'title')->textInput()->label('Название') ?>
+    
     <?= $form->field($model, 'shorttitle')->textInput()->label('Сокращенное Название') ?>
 <?php
     $teacher = Teacher::find()->all();
