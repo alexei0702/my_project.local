@@ -1,17 +1,27 @@
 <?php
+
 namespace app\models;
 use yii\base\Model;
+
+
+namespace app\models;
+
+use yii\base\Model;
+
 class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 	public function rules()
     {
+
         return [[['user_id','user_password','username'],'required'],
+
         ];
     }
     public static function findIdentity($id)
     {
         return VimiUser::findOne($id);
     }
+
     /**
      * @inheritdoc
      */
@@ -22,8 +32,10 @@ class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
                 return new static($user);
             }
         }
+
         return null;
     }
+
     /**
      * Finds user by username
      *
@@ -38,8 +50,12 @@ class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
                 return new static($user);
             }
         }
+
         return null;
     }
+
+
+
     /**
      * @inheritdoc
      */
@@ -47,6 +63,8 @@ class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return $this->user_id;
     }
+
+
     /**
      * @inheritdoc
      */
@@ -54,6 +72,8 @@ class VimiUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return $this->authKey;
     }
+
+
     /**
      * @inheritdoc
      */

@@ -1,5 +1,6 @@
 <?php
 namespace app\models;
+
 class Groups extends \yii\db\ActiveRecord
 {
 	public function rules()

@@ -1,5 +1,8 @@
 <?php
 namespace app\models;
+
+
+
 class Students extends \yii\db\ActiveRecord
 {
 	public function rules()

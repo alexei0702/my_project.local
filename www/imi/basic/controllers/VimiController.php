@@ -15,6 +15,9 @@ use app\models\Teacher;
 use app\models\Groups;
 use app\models\Students;
 use app\models\Schedule;
+
+
+
 class VimiController extends Controller
 {
     /*public function behaviors() { 
@@ -63,11 +66,15 @@ class VimiController extends Controller
 
 
 
+
+
+
     /** ******** 
     ********
     *************/
     public function actionViews()
     {
+
         $schedule = Schedule::find()->where(['group_id'=>$_GET['gr']])->orderBy('day')->all();
         return $this->render('view', ['schedule' => $schedule]);
     }
@@ -75,6 +82,7 @@ class VimiController extends Controller
     /*************
     **************
     ****************/
+
     public function Choose()
     {
         $model = new Vimi_aud();
@@ -83,17 +91,25 @@ class VimiController extends Controller
             $aud_num=$aud_num['aud_num'];
             return $this->redirect('index.php?r=vimi&audNum='.$aud_num);
         }
+
+
+
+
         else{
             return $this->render('choose', ['model' => $model]);
         }
     }
+
      /*************
     **************
     ****************/
+
     /* Авторизация для отмечания посещения */
     public function actionVisit()
     {
         $user = new VimiUser();            
+
+
         if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
         {
             $user1 = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
@@ -113,19 +129,25 @@ class VimiController extends Controller
             {
                 throw new NotFoundHttpException('Incorrect login or password.');
             }
+
         }
         return $this->render('visit', ['user' => $user]);
     }     
      /*************
     **************
     ****************/         
+
+
+
+
     public function actionLogin()
     {
         $user = new VimiUser();
         if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
         {
-            $user1 = VimiUser::find()->where(['username' => $user->username,'user_password' => $user->user_password])->one();
-            if($user1)
+            $user = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
+            if($user)
+
             {                    
                 Yii::$app->user->login($user);
                 //$_SESSION['status']=$user['status'];
@@ -133,16 +155,17 @@ class VimiController extends Controller
             }
             else
             {
-                //print_r($user->username);
                 throw new NotFoundHttpException('Incorrect login or password.');
             }
             
         }
         return $this->render('auth', ['user' => $user]);
+
     } 
      /*************
     **************
-    ****************/                             
+    ****************/                                                          
+
     /**
      * Logout action.
      *
@@ -181,6 +204,7 @@ class VimiController extends Controller
         }
         return $this->render('teacher', ['model' => $model]);
     }
+
      /*************
     **************
     ****************/

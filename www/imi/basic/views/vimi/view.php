@@ -3,13 +3,13 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use app\models\Schedule;
 ?>
-	<style>
+<style>
     html,
         body {
             margin: 0;
             padding: 0;
         }
-table {
+table, .container {
             width: 100%;
             border-collapse: collapse;
         }
@@ -20,7 +20,6 @@ table {
         }
 
 </style>
-
 <?php $count_pair=0;?>
 
 	<div class="container">
@@ -92,7 +91,7 @@ table {
     <tbody>
     	<?php 
     	$num=1;
-    	$stud=$sk->getStudents($sk->group_id);
+    	$stud=Schedule::getStudents($_GET['gr']);
     	foreach ($stud as $stud):   	
     	?>
     	<tr>
