@@ -233,5 +233,23 @@ class VimiController extends Controller
         }
         return $this->render('students', ['model' => $model]);
     }
+    /*************
+    *************
+    ***************/
+    /* Создание расписания на неделю */
+
+    public function actionWeekCreate()
+    {
+        print_r(Yii::$app->request->isPost);
+        if (Yii::$app->request->isPost)
+        {
+            $info= array('date'=> $_POST['date'],
+                      'week'=> $_POST['week']);
+            $schedule = Schedule::find()->where(['group_id'=>$_GET['gr']])->orderBy('day')->all();
+            return $this->render('weekCreate', ['schedule' => $schedule,'info' => $info ]);
+        }
+        return $this->render('weekChoose');
+    }
+
 }
 ?>  

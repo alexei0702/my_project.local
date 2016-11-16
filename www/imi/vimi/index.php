@@ -117,13 +117,13 @@ for($i=0;$i<10;$i++){
     <tr>
         <td><?= $j?></td>
         <td>Ефимов Алексей Павлович</td>
-        <td>н</td>
+        <td><input type="text" name="baida1" value="jopa"></td>
         <td></td>
         <td>н</td>
         <td></td>
         <td></td>
         <td></td>
-        <td>н</td>
+        <td><input type="text" name="11"></td>
         <td>н</td>
         <td></td>
         <td>н</td>
@@ -179,7 +179,7 @@ for($i=0;$i<10;$i++){
     </tbody>
     </table>
         
-
+<button>submit</button>
 
 
 
