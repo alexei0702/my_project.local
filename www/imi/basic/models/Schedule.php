@@ -20,5 +20,10 @@ class Schedule extends \yii\db\ActiveRecord
 		$count = Schedule::find()->where(['day' => $day])->count(); 
 		return $count;
 	}
+	public function getLessonLong($day,$gr_id){
+		$les_id = Schedule::find()->where(['day'=>$day, 'group_id' => $gr_id])->all();
+		$lesson = Lesson::find()->where(['lesson_id' => $les_id])->all();
+		return $lesson;
+	}
 }
 ?>

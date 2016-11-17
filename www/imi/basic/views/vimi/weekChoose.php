@@ -1,21 +1,78 @@
+<?php
+use app\models\Schedule;
+
+?>
+<?php if($model->week==1)
+        $week = "Четная неделя";
+      else
+        $week = "Нечетная неделя";
+
+?>
+<h2><?php echo $week; ?></h2>
 <div class="container">
     <div class="row">
-<form action="index.php?r=vimi/week-create" method="POST" class="form">
-	<div class="col-md-4">
-		Дата начала:<input class="form-control" type="text" name="date">
-	</div>
-    <div class="col-md-4">
-    <br>
-    <select class="form-control" name="week">
-        <option>Выбери неделю</option>
-        <option value="2">Нечетная</option>
-        <option value="1">Четная</option>
-    </select>
+        <div class="col-md-4">
+            <h3>Понедельник (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(1,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
+        <div class="col-md-4">
+            <h3>Вторник (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(2,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
+        <div class="col-md-4">
+            <h3>Среда (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(3,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
     </div>
-    <div class="col-md-4">
-    <br>
-    	<button type="submit" class="btn btn-lg btn-success">OK</button>
+    <br><br>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Четверг (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(4,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
+        <div class="col-md-4">
+            <h3>Пятница (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(5,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
+        <div class="col-md-4">
+            <h3>Суббота (<?= $model->date?>):</h3><br>
+            <?php 
+                $title = Schedule::getLessonLong(6,$_GET['gr']);
+                foreach ($title as $title) {
+                    echo $title->title;
+                    echo "<br>";
+                }
+            ?>
+        </div>
     </div>
-</form>
-</div>
 </div>

@@ -15,6 +15,7 @@ use app\models\Teacher;
 use app\models\Groups;
 use app\models\Students;
 use app\models\Schedule;
+use app\models\Rasp;
 
 
 
@@ -240,15 +241,13 @@ class VimiController extends Controller
 
     public function actionWeekCreate()
     {
-        print_r(Yii::$app->request->isPost);
-        if (Yii::$app->request->isPost)
+        $model = new Rasp();
+        if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
         {
-            $info= array('date'=> $_POST['date'],
-                      'week'=> $_POST['week']);
             $schedule = Schedule::find()->where(['group_id'=>$_GET['gr']])->orderBy('day')->all();
-            return $this->render('weekCreate', ['schedule' => $schedule,'info' => $info ]);
+            return $this->render('weekChoose', ['schedule' => $schedule,'model' => $model ]);
         }
-        return $this->render('weekChoose');
+        return $this->render('weekCreate', ['model' => $model]);
     }
 
 }
