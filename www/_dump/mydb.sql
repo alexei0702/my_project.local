@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 13 2016 г., 10:17
--- Версия сервера: 10.1.13-MariaDB
--- Версия PHP: 7.0.8
+-- Время создания: Ноя 22 2016 г., 13:02
+-- Версия сервера: 10.1.16-MariaDB
+-- Версия PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -232,6 +232,24 @@ INSERT INTO `vimi_aud` (`aud_id`, `aud_num`) VALUES
 (21, '1312'),
 (22, '1313'),
 (23, '1316');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `vimi_msk`
+--
+
+CREATE TABLE `vimi_msk` (
+  `students_id` int(11) NOT NULL,
+  `count_null` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `vimi_msk`
+--
+
+INSERT INTO `vimi_msk` (`students_id`, `count_null`) VALUES
+(1, 0);
 
 -- --------------------------------------------------------
 
