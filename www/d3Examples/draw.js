@@ -1,5 +1,5 @@
-var width = 750,
-    height = 750,
+var width = 500,
+    height = 500,
     radius = Math.min(width, height) / 2,
     innerRadius = 0.3 * radius;
 
@@ -17,14 +17,14 @@ var tip = d3.tip()
 var arc = d3.svg.arc()
   .innerRadius(innerRadius)
   .outerRadius(function (d) { 
-    return (radius - innerRadius) * (d.data.score / 11.0) + innerRadius; 
+    return (radius - innerRadius) * (d.data.score / 100.0) + innerRadius; 
   });
 
 var outlineArc = d3.svg.arc()
         .innerRadius(innerRadius)
         .outerRadius(radius);
 
-var svg = d3.select("#id").append("svg")
+var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
@@ -68,11 +68,11 @@ d3.csv('aster_data.csv', function(error, data) {
   var score = 
     data.reduce(function(a, b) {
       //console.log('a:' + a + ', b.score: ' + b.score + ', b.weight: ' + b.weight);
-      return a + b.score; 
-    }, 0); /*/ 
+      return a + (b.score * b.weight); 
+    }, 0) / 
     data.reduce(function(a, b) { 
       return a + b.weight; 
-    }, 0);*/
+    }, 0);
 
   svg.append("svg:text")
     .attr("class", "aster-score")
