@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-var width = 500,
-=======
 var width = 850,
->>>>>>> 2e3d98c4174a95fdf59ef9d83205edb38f193025
     height = 500,
     radius = Math.min(width, height) / 2,
     innerRadius = 0.3 * radius;
@@ -21,14 +17,14 @@ var tip = d3.tip()
 var arc = d3.svg.arc()
   .innerRadius(innerRadius)
   .outerRadius(function (d) { 
-    return (radius - innerRadius) * (d.data.score / 100.0) + innerRadius; 
+    return (radius - innerRadius) * (d.data.score / 11.0) + innerRadius; 
   });
 
 var outlineArc = d3.svg.arc()
         .innerRadius(innerRadius)
         .outerRadius(radius);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#id").append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
@@ -36,7 +32,7 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.csv('aster_data.csv', function(error, data) {
+d3.csv('csv/aster_data.csv', function(error, data) {
 
   data.forEach(function(d) {
     d.id     =  d.id;
@@ -72,11 +68,11 @@ d3.csv('aster_data.csv', function(error, data) {
   var score = 
     data.reduce(function(a, b) {
       //console.log('a:' + a + ', b.score: ' + b.score + ', b.weight: ' + b.weight);
-      return a + (b.score * b.weight); 
-    }, 0) / 
+      return a + b.score; 
+    }, 0); /*/ 
     data.reduce(function(a, b) { 
       return a + b.weight; 
-    }, 0);
+    }, 0);*/
 
   svg.append("svg:text")
     .attr("class", "aster-score")
