@@ -16,6 +16,7 @@ use app\models\Groups;
 use app\models\Students;
 use app\models\Schedule;
 use app\models\Rasp;
+use app\models\VimiMsk;
 
 
 
@@ -143,6 +144,9 @@ class VimiController extends Controller
 
     public function actionLogin()
     {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
         $user = new VimiUser();
         if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
         {
@@ -151,7 +155,7 @@ class VimiController extends Controller
 
             {                    
                 Yii::$app->user->login($user);
-                //$_SESSION['status']=$user['status'];
+                $_SESSION['status']=$user['user_status'];
                 return $this->goBack();
             }
             else
@@ -248,6 +252,23 @@ class VimiController extends Controller
             return $this->render('weekChoose', ['schedule' => $schedule,'model' => $model ]);
         }
         return $this->render('weekCreate', ['model' => $model]);
+    }
+
+    /*****************
+    ******************
+    *****************/
+    public function actionMsk()
+    {
+        if (Yii::$app->user->isGuest) 
+        {
+            return $this->actionLogin();
+        }
+        $id=Yii::$app->user->getId();
+        $stud = Students::find()->where(['user_id'=>$id])->one();
+        $msk = VimiMsk::find()->where(['students_id'=>$stud])->one();
+        $group = Groups::find()->where(['group_id' => $stud['group_id']])->one();
+        $stud = Students::find()->where(['group_id'=>$group->group_id])->all();
+        return $this->render('mskViews', ['group' => $group, 'stud' => $stud]);
     }
 
 }
