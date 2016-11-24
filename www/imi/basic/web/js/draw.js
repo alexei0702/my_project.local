@@ -1,3 +1,4 @@
+code = code.getAttribute('class');
 var width = 850,
     height = 500,
     radius = Math.min(width, height) / 2,
@@ -17,7 +18,7 @@ var tip = d3.tip()
 var arc = d3.svg.arc()
   .innerRadius(innerRadius)
   .outerRadius(function (d) { 
-    return (radius - innerRadius) * (d.data.score / 11.0) + innerRadius; 
+    return (radius - innerRadius) * (d.data.score / 12.0) + innerRadius; 
   });
 
 var outlineArc = d3.svg.arc()
@@ -32,7 +33,7 @@ var svg = d3.select("#id").append("svg")
 
 svg.call(tip);
 
-d3.csv('csv/aster_data.csv', function(error, data) {
+d3.csv('csv/'+code+'.csv', function(error, data) {
 
   data.forEach(function(d) {
     d.id     =  d.id;

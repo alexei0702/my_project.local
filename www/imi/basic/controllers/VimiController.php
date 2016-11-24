@@ -150,7 +150,7 @@ class VimiController extends Controller
         $user = new VimiUser();
         if (Yii::$app->request->isPost&&$user->load(Yii::$app->request->post())) 
         {
-            $user = VimiUser::find()->where(['user_id' => $user->user_id,'user_password' => $user->user_password])->one();
+            $user = VimiUser::find()->where(['username' => $user->username,'user_password' => $user->user_password])->one();
             if($user)
 
             {                    
@@ -263,13 +263,88 @@ class VimiController extends Controller
         {
             return $this->actionLogin();
         }
-        $id=Yii::$app->user->getId();
-        $stud = Students::find()->where(['user_id'=>$id])->one();
-        $msk = VimiMsk::find()->where(['students_id'=>$stud])->one();
-        $group = Groups::find()->where(['group_id' => $stud['group_id']])->one();
-        $stud = Students::find()->where(['group_id'=>$group->group_id])->all();
-        return $this->render('mskViews', ['group' => $group, 'stud' => $stud]);
+        if($_SESSION['status']==1)
+        {
+            $username = Yii::$app->user->identity->username;
+            $group = Groups::find()->where(['group_code' => $username])->one();
+            $msk = VimiMsk::find()->where(['group_id'=>$group->group_id])->all();
+            $count = VimiMsk::find()->where(['count_null' => 0,'group_id'=>$group->group_id ])->count();
+            return $this->render('mskViewsStud', ['msk' => $msk, 'group'=>$group, 'count' => $count]);
+        }
+        else
+        {
+            //$group = Groups::find()->all();
+            //$group_code = Groups::find()->where(['group_code' => $group->group_code])->one();
+            $count = VimiMsk::find()->groupBy()->sum('count_null')->havin;
+            return $this->render('mskViews',['group_nulls' => $group_nulls]);
+        }
+    }
+    /**********
+    ***********
+    **********/
+    /* Перевод из rgb в hex */
+    public function rgbToHex($color) {
+        $red = dechex($color[0]); 
+        $green = dechex($color[1]);
+        $blue = dechex($color[2]);
+        return "#" . $red . $green . $blue;
+    }   
+    /**********
+    ***********
+    **********/
+    /* Генерация csv файлов */
+    public function actionGenerateCsv()
+    {
+        if (Yii::$app->user->isGuest) 
+        {
+            return $this->actionLogin();
+        }
+        $fp = fopen("csv/".Yii::$app->user->identity->username.".csv", "w"); // создаем файл
+        $fp = fopen("csv/".Yii::$app->user->identity->username.".csv", "a"); // open file
+        $firststr = '"id","order","score","weight","color","label"'; // Первая строка
+        $firststr.="\n";
+        $test = fwrite($fp, $firststr);
+        $groupCode = Yii::$app->user->identity->username;
+        $group = Groups::find()->where(['group_code' => $groupCode])->one();
+        $msk = VimiMsk::find()->where(['group_id'=>$group->group_id])->all();
+        $i=1;
+        foreach ($msk as $msk) 
+        {
+            if($msk->count_null!=0)
+            {
+                if($msk->count_null<2)
+                    $color_rgb = array(50,180,50);
+                if($msk->count_null>=2&&$msk->count_null<5)
+                    $color_rgb = array(80,120,50);
+                if($msk->count_null>=5&&$msk->count_null<=8)
+                    $color_rgb = array(135,50,50);
+                if($msk->count_null>8)
+                    $color_rgb = array(200,50,50);
+                $color = $this->rgbToHex($color_rgb);
+                $str = '"'.$i.'"'.",".'5'.",".'"'.$msk->count_null.'"'.",".'1'.",".$color.",".'"'.$msk->user_fio.'"'."\n";
+                $test = fwrite($fp, $str);
+                $i++;
+            }
+        }
+        fclose($fp); //Закрытие файла
+        return $this->goBack();
     }
 
+    public function actionGenerateTsv()
+    {
+        $fp = fopen("csv/data.tsv", "w"); // создаем файл
+        $fp = fopen("csv/data.tsv", "a"); // open file
+        $firststr = "letter"."\t"."frequency"; // Первая строка
+        $firststr.="\n";
+        $test = fwrite($fp, $firststr);
+        $group = Groups::find()->all();
+        foreach ($group as $group) 
+        {
+            $group_code = Groups::find()->where(['group_code' => $group->group_code])->one();
+            $count = VimiMsk::find()->where(['group_id'=>$group_code->group_id ])->sum('count_null'); 
+            $str = $group->group_code."\t".$count."\n";
+            $test = fwrite($fp, $str);
+        }
+    }
 }
 ?>  

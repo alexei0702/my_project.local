@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 ?>
 	
 <?php $form = ActiveForm::begin() ?>
-	<?= $form->field($user, 'user_id')->textInput()->label('Login') ?>
+	<?= $form->field($user, 'username')->textInput()->label('Login') ?>
 
     <?= $form->field($user, 'user_password')->passwordInput()->label('Password') ?>
 

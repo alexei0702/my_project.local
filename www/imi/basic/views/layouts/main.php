@@ -33,7 +33,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Views', 'url' => ['/vimi/views']],
+            //['label' => 'Views', 'url' => ['/vimi/views']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/vimi/login']]
             ) : (
