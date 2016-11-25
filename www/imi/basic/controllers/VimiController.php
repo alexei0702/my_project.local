@@ -273,10 +273,28 @@ class VimiController extends Controller
         }
         else
         {
-            //$group = Groups::find()->all();
-            //$group_code = Groups::find()->where(['group_code' => $group->group_code])->one();
-            $count = VimiMsk::find()->groupBy()->sum('count_null')->havin;
-            return $this->render('mskViews',['group_nulls' => $group_nulls]);
+            $count=false;
+            $nulls = array();
+            $handle = fopen("csv/data.tsv", "r");
+            if ($handle) 
+            {
+                $buffer = fgets($handle, 4096);
+                while (($buffer = fgets($handle, 4096)) !== false) 
+                {
+                    $row = explode("\t", $buffer);
+                    if($row[1]==0)
+                    {
+                        $count=true;
+                        $nulls[] = $row[0];
+                    }
+                }
+                if (!feof($handle)) 
+                {
+                    echo "Error: unexpected fgets() fail\n";
+                }
+                fclose($handle);
+            }
+            return $this->render('mskViews',['nulls' => $nulls, 'count' => $count]);
         }
     }
     /**********
@@ -342,8 +360,8 @@ class VimiController extends Controller
         {
             $group_code = Groups::find()->where(['group_code' => $group->group_code])->one();
             $count = VimiMsk::find()->where(['group_id'=>$group_code->group_id ])->sum('count_null'); 
-            $str = $group->group_code."\t".$count."\n";
-            $test = fwrite($fp, $str);
+                $str = $group->group_code."\t".$count."\n";
+                $test = fwrite($fp, $str);  
         }
     }
 }

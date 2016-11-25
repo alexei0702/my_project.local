@@ -1,5 +1,23 @@
 <style>
-
+body {
+  margin: 0;
+  padding: 0;
+  font: 10px sans-serif;
+}
+table
+{
+  width: 100%;
+  border-collapse: collapse;
+}
+th,td 
+{
+  border: #ccc 1px solid;
+  padding: 5px 10px;
+}
+.container
+{
+  width: 100%;
+}
 .bar {
   fill: steelblue;
 }
@@ -13,11 +31,12 @@
 }
 
 </style>
-<div class="col-md-6">
+<div class="col-md-8">
 <h1>Ведомость межсессионного контроля</h1>
-<svg width="960" height="500"></svg>
+<svg width="900" height="500"></svg>
 </div>
-<div class="col-md-6">
+<?php if($count): ?>
+<div class="col-md-4">
 <h1>Cписок топ студентов:
 <table class='table table-striped table-hover table-bordered'>
     <thead>
@@ -27,23 +46,20 @@
     </tr>
   </thead>
   <tbody>
-    <?php $i=1; foreach ($msk as $msk)
+    <?php $i=1; foreach ($nulls as $nulls)
     {
-      if($msk->count_null===0)
-      {
         echo "<tr>";
         echo "<td>".$i."</td>";
-        echo "<td>".$msk->user_fio."</td>";
+        echo "<td>".$nulls."</td>";
         echo "</tr>";
         $i++;
-      }
     }
     ?>
 </tbody>
 </table>
 </h1>
-<?php endif; ?>
 </div>
+<?php endif; ?>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
