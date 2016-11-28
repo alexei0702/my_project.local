@@ -263,39 +263,65 @@ class VimiController extends Controller
         {
             return $this->actionLogin();
         }
-        if($_SESSION['status']==1)
+        if(($_SESSION['status']==1)||(Yii::$app->request->isPost))// && $model->load(Yii::$app->request->post())))
         {
-            $username = Yii::$app->user->identity->username;
-            $group = Groups::find()->where(['group_code' => $username])->one();
-            $msk = VimiMsk::find()->where(['group_id'=>$group->group_id])->all();
-            $count = VimiMsk::find()->where(['count_null' => 0,'group_id'=>$group->group_id ])->count();
-            return $this->render('mskViewsStud', ['msk' => $msk, 'group'=>$group, 'count' => $count]);
+            if($_SESSION['status']==1)
+            {
+                $username = Yii::$app->user->identity->username;
+                $group = Groups::find()->where(['group_code' => $username])->one();
+                $msk = VimiMsk::find()->where(['group_id'=>$group->group_id])->all();
+                $count = VimiMsk::find()->where(['count_null' => 0,'group_id'=>$group->group_id ])->count();                    
+                return $this->render('mskViewsStud', ['msk' => $msk, 'group'=>$group, 'count' => $count]);
+            }
+            else
+            {
+                $model = new Groups;
+                $model->load(Yii::$app->request->post());
+                echo $model->group_code;
+            }
         }
         else
         {
-            $count=false;
-            $nulls = array();
-            $handle = fopen("csv/data.tsv", "r");
-            if ($handle) 
-            {
-                $buffer = fgets($handle, 4096);
-                while (($buffer = fgets($handle, 4096)) !== false) 
-                {
-                    $row = explode("\t", $buffer);
-                    if($row[1]==0)
-                    {
-                        $count=true;
-                        $nulls[] = $row[0];
-                    }
-                }
-                if (!feof($handle)) 
-                {
-                    echo "Error: unexpected fgets() fail\n";
-                }
-                fclose($handle);
-            }
-            return $this->render('mskViews',['nulls' => $nulls, 'count' => $count]);
+
+            return $this->redirect(['msk-decanat']);
         }
+    }
+    /**********
+    ***********
+    **********/
+    public function actionMskDecanat()
+    {
+        $count=false;
+        $nulls = array();
+        $handle = fopen("csv/dataNull.tsv", "r");
+        if ($handle) 
+        {
+            $buffer = fgets($handle, 4096);
+            while (($buffer = fgets($handle, 4096)) !== false) 
+            {
+                $row = explode("\t", $buffer);
+                if($row[1]==0)
+                {
+                    $count=true;
+                    $nulls[] = $row[0];
+                }
+            }
+            if (!feof($handle)) 
+            {
+                echo "Error: unexpected fgets() fail\n";
+            }
+            fclose($handle);
+            }
+        return $this->render('mskViews',['nulls' => $nulls, 'count' => $count]);
+    }
+    /**********
+    ***********
+    **********/
+    public function actionChooseGroup()
+    {
+        $model = new Groups();
+        $groups = Groups::find()->all();
+        return $this->render('chooseGroup', ['groups' => $groups, 'model' => $model]);  
     }
     /**********
     ***********
@@ -348,10 +374,31 @@ class VimiController extends Controller
         return $this->goBack();
     }
 
-    public function actionGenerateTsv()
+    public function actionGenerateTsvNull()
     {
         $fp = fopen("csv/data.tsv", "w"); // создаем файл
         $fp = fopen("csv/data.tsv", "a"); // open file
+        $firststr = "letter"."\t"."frequency"; // Первая строка
+        $firststr.="\n";
+        $test = fwrite($fp, $firststr);
+        $group = Groups::find()->all();
+        foreach ($group as $group) 
+        {
+            $group_code = Groups::find()->where(['group_code' => $group->group_code])->one();
+            $count = VimiMsk::find()->where(['group_id'=>$group_code->group_id ])->sum('count_null'); 
+            if($count>0)
+            {
+                $str = $group->group_code."\t".$count."\n";
+                $test = fwrite($fp, $str);  
+            }
+        }
+    }
+
+
+    public function actionGenerateTsv()
+    {
+        $fp = fopen("csv/dataNull.tsv", "w"); // создаем файл
+        $fp = fopen("csv/dataNull.tsv", "a"); // open file
         $firststr = "letter"."\t"."frequency"; // Первая строка
         $firststr.="\n";
         $test = fwrite($fp, $firststr);

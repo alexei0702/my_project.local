@@ -26,7 +26,7 @@ use yii\widgets\LinkPager;
 	<tbody>
 		<?php $i=1; foreach ($msk as $msk)
 		{
-			if($msk->count_null===0)
+			if($msk->count_null==0)
 			{
 				echo "<tr>";
 				echo "<td>".$i."</td>";

@@ -31,13 +31,14 @@ th,td
 }
 
 </style>
+<div class="row">
 <div class="col-md-8">
 <h1>Ведомость межсессионного контроля</h1>
 <svg width="900" height="500"></svg>
 </div>
 <?php if($count): ?>
 <div class="col-md-4">
-<h1>Cписок топ студентов:
+<h1>Cписок топ групп:
 <table class='table table-striped table-hover table-bordered'>
     <thead>
     <tr>
@@ -58,6 +59,11 @@ th,td
 </tbody>
 </table>
 </h1>
+</div>
+</div>
+<br><br><br>
+<div class="row">
+<p><a class="btn btn-info btn-lg center-block" href="index.php?r=vimi/choose-group">Перейти к группам &raquo;</a></p>
 </div>
 <?php endif; ?>
 <script src="https://d3js.org/d3.v4.min.js"></script>
