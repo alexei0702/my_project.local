@@ -263,7 +263,7 @@ class VimiController extends Controller
         {
             return $this->actionLogin();
         }
-        if(($_SESSION['status']==1)||(Yii::$app->request->isPost))// && $model->load(Yii::$app->request->post())))
+        if(($_SESSION['status']==1)||(Yii::$app->request->isPost))
         {
             if($_SESSION['status']==1)
             {
@@ -277,7 +277,11 @@ class VimiController extends Controller
             {
                 $model = new Groups;
                 $model->load(Yii::$app->request->post());
-                echo $model->group_code;
+                $username = $model->group_code;
+                $group = Groups::find()->where(['group_code' => $username])->one();
+                $msk = VimiMsk::find()->where(['group_id'=>$group->group_id])->all();
+                $count = VimiMsk::find()->where(['count_null' => 0,'group_id'=>$group->group_id ])->count();
+                return $this->render('mskViewsStud', ['msk' => $msk, 'group'=>$group, 'count' => $count]);
             }
         }
         else
