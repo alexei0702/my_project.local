@@ -1,10 +1,4 @@
-<?php
-include ('header.php');
-?>
-
-
 <h1 style="text-align: center;">Birds create</h1>
-<div class="container">
 <form class="form form-inline" action="#" method="POST">
 <select class="form-control" style="width: 100%;">
 	<option>Выберите Отряд</option>
@@ -84,7 +78,3 @@ include ('header.php');
 <br>
 <button class="btn btn-lg btn-primary form-group" type="submit">Сохранить</button>
 </form>
-</div>
-
-</body>
-</html>
