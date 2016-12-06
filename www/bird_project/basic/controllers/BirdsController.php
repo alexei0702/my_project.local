@@ -36,12 +36,13 @@ public function actionCreate()
         $st_con = new StatusConnect();
         if (Yii::$app->request->isPost&&$st_con->load(Yii::$app->request->post()))
         {
-            print_r($st_con);
+            echo $st_con->status_id;
+            //print_r($st_con);
             //$bird->save();
             //$popul_con->bird_id = $bird->bird_id;
             $st_con->bird_id = 1;
             //$popul_con->save();
-            $st_con->save();
+            //$st_con->save();
             //return $this->redirect(['index']);
         }
         $squad = Squad::find()->all();
