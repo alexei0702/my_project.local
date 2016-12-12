@@ -18,10 +18,9 @@ use yii\helpers\ArrayHelper;
 
 </style>
 
-
 <h1 style="text-align: center;">Birds create</h1>
 
-<?php $form = ActiveForm::begin(['options' => ['class' => 'form']]) ?>
+<?php $form = ActiveForm::begin(['options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
 
 <?= $form->field($bird, 'bird_name')->label('Название'); ?>
 <br>
@@ -70,7 +69,7 @@ echo $form->field($bird, 'propagation',['inputOptions' => ['class' => 'textarea'
 <?php
 echo $form->field($bird, 'migration',['inputOptions' => ['class' => 'textarea']])->textarea()->label('');
 ?>
-<p><h3>Местообитания</h3></p>
+<p><h3>Место обитания</h3></p>
 <?php
 echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])->textarea()->label('');
 ?>
@@ -78,7 +77,7 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 <p><h3>Численность:</h3></p>
 <div class="col-lg-5">
 <?php
-    $items = ArrayHelper::map($population,'population_id','count');
+    $items = ArrayHelper::map($population,'population_id','population');
     $params = [
         'prompt' => 'Численность'
     ];
@@ -99,10 +98,6 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 </div>
 <div class="clearfix"></div>
 <br>
-<br>	
-<button class="btn btn-default form-group" type="submit">Обзор</button>
-<img src="images/1.jpg" width="700" height="500">
-<br>
-<br>
+<?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>
 <button class="btn btn-lg btn-primary form-group" type="submit">Сохранить</button>
 <?php ActiveForm::end() ?>

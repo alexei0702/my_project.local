@@ -4,8 +4,8 @@ use yii\widgets\ActiveForm;
 
 ?>
 <?php $form = ActiveForm::begin() ?>
-    <?= $form->field($model, 'count')->textInput()->label('Численность') ?>
+    <?= $form->field($model, 'population')->textInput()->label('Численность') ?>
 
-    <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
 <?php ActiveForm::end() ?>

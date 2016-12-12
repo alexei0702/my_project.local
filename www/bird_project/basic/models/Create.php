@@ -10,6 +10,12 @@ class Create extends \yii\db\ActiveRecord
 {
 	public $modelName;
 
+	public function rules()
+    {
+        return [
+            [['modelName'], 'required'],
+        ];
+    }
 }
 
 ?>
