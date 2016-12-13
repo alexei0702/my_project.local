@@ -7,14 +7,9 @@ use app\models\Kind;
 use app\models\Status;
 use app\models\StatusConnect;
 
-$this->title = 'Birds';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1>Birds</h1>
-<p>
-        <?= Html::a('Create Bird', ['create-bird'], ['class' => 'btn btn-info']) ?>
-</p>
+<h1 style="text-align: center;">Birds</h1>
 
 <br>
 <?php

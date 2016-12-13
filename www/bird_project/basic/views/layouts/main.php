@@ -35,7 +35,14 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [Yii::$app->user->isGuest ? (
+        'items' => [
+        Yii::$app->user->isGuest ?
+        ['label' => 'Views', 'url' => ['/vimi/views']]
+        :
+        ['label' => 'Режим редактирования', 'url' => ['/birds']]
+
+        ,
+        Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/birds/login']]
             ) : (
                 '<li>'

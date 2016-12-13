@@ -34,13 +34,13 @@ class BirdsController extends Controller
         [ 'allow' => true, 
          'actions' => ['login'], 
          'roles' => ['?'], 
-         ],
+        ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
-        [   'actions' => ['update','delete','update-bird'], 
+        [   'actions' => ['update','delete','update-bird','delete-bird'], 
         'allow' => true,
         'matchCallback' => function ($rule, $action) {
                             $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
