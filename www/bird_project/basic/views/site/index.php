@@ -1,34 +1,39 @@
 <?php
+use yii\helpers\Html;
+use yii\widgets\LinkPager;
+use app\models\Squad;
+use app\models\Family;
+use app\models\Kind;
+use app\models\Status;
+use app\models\StatusConnect;
 
-/* @var $this yii\web\View */
-
-$this->title = 'Birds System';
+$this->title = 'Birds';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>This is BIRDS!</h1>
-    </div>
+<h1>Birds</h1>
+<p>
+        <?= Html::a('Create Bird', ['create-bird'], ['class' => 'btn btn-info']) ?>
+</p>
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4 alert alert-success">
-                <h2>Show all birds</h2>
-                <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds">Show</a></p>
-            </div>
-            <div class="col-lg-4 alert alert-danger">
-                <h2>Create new birds</h2>
-                <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-bird">Create</a></p>
-            </div>
-            <div class="col-lg-4 alert alert-info">
-                <h2>Create/edit/delete other</h2>
-                <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-edit">Click</a></p>
-            </div>
-        </div>
-
-    </div>
+<br>
+<?php
+foreach ($birds as $bird): 
+$squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
+$family = Family::find()->where(['family_id' => $bird->family_id])->one();
+$kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
+?>
+<div class="col-lg-4">
+            <a href='index.php?r=site/views-details&id=<?=$bird->bird_id?>'>
+            <img src="<?= '/bird_project/basic/upload/'.$bird->link?>" width="400" class="img-rounded" alt="111"></a>
+            <br>
+            <?= Html::a(Html::encode ("{$bird->bird_name} - {$bird->bird_name_lat}"), "index.php?r=site/views-details&id=".$bird->bird_id) ?><br>
+            <?= Html::encode ("{$squad->squad_name} - {$squad->squad_name_lat}") ?> <br>
+            <?= Html::encode ("{$family->family_name} - {$family->family_name_lat}") ?><br>
+            <?= Html::encode ("{$kind->kind_name} - {$kind->kind_name_lat}") ?> <br>
 </div>
+<?php 
+ endforeach;
+ ?>
+<div class="clear-fix"></div>
+<?= LinkPager::widget(['pagination' => $pagination]) ?>

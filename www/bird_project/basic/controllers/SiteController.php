@@ -8,6 +8,16 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Bird;
+use yii\data\Pagination;
+use app\models\Squad;
+use app\models\Family;
+use app\models\Kind;
+use app\models\Status;
+use app\models\Place;
+use app\models\PopulationConnect;
+use app\models\StatusConnect;
+use app\models\Population;
 
 class SiteController extends Controller
 {
@@ -60,66 +70,52 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
+         $query = Bird::find();
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    $pagination = new Pagination([
+            'defaultPageSize' => 3,
+            'totalCount' => $query->count(),
+        ]);
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
+    $birds = $query->orderBy('bird_name')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+    return $this->render('index', [
+            'birds' => $birds,
+            'pagination' => $pagination,
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
+
+
+    /**********************
+    ***********************
+    *********************/
+    public function actionViewsDetails($id)
     {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if($id!=0)
+        {
+            $bird = Bird::find()->where(['bird_id' => $id])->one();
+            if($bird)
+            {
+                $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
+                $family = Family::find()->where(['family_id' => $bird->family_id])->one();
+                $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
+                $statusCon = StatusConnect::find()->where(['bird_id' => $bird->bird_id])->all();
+                $popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->all();
+                return $this->render('birdViews', ['bird' => $bird,'squad' => $squad, 'family' => $family, 'kind' => $kind, 'statusCon' => $statusCon, 'popul_con' => $popul_con]);
+            }
+            else
+            {
+                echo "Bird not found";
+                die;
+            }
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+        else
+        {
+            echo "Missing argument";
+            die;
+        }
+    }   
 }

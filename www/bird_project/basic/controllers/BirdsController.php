@@ -36,11 +36,11 @@ class BirdsController extends Controller
          'roles' => ['?'], 
          ],
 
-        [ 'actions' => ['index','create','create-bird','logout'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
-        [   'actions' => ['update','delete'], 
+        [   'actions' => ['update','delete','update-bird'], 
         'allow' => true,
         'matchCallback' => function ($rule, $action) {
                             $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -65,9 +65,12 @@ class BirdsController extends Controller
     }
 
 
-
-
 public function actionIndex()
+{
+    return $this->render('index');
+}
+
+public function actionViewsBirds()
 {
     $query = Bird::find();
 
@@ -80,7 +83,7 @@ public function actionIndex()
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-    return $this->render('index', [
+    return $this->render('views', [
             'birds' => $birds,
             'pagination' => $pagination,
         ]);
