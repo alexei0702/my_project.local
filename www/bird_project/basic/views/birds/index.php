@@ -4,6 +4,16 @@
 
 $this->title = 'Birds System';
 ?>
+<style type="text/css">
+    body{
+    background-image: url('http://www.zastavki.com/pictures/originals/2015/Backgrounds_Silhouette_of_the_bird_on_branch__light_background_102709_.jpg');
+    background-size: cover; 
+}
+.footer
+{
+    background: rgba(255, 255, 255, 0);
+}
+</style>
 <div class="site-index">
 
     <div class="jumbotron">
