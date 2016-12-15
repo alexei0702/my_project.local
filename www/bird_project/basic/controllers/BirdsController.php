@@ -267,9 +267,17 @@ public function actionCreateEdit()
     public function actionDeleteBird($id)
     {
         $bird = $this->findModelBird($id);
-        $popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->delete();
-        $st_con = Status::find()->where(['bird_id' => $bird->bird_id])->delete();
-        //unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
+        //$popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->deleteAll();
+        $popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->all();
+                foreach ($popul_con as $key) {
+                    $key->delete();
+                }
+        $st_con = StatusConnect::find()->where(['bird_id' => $bird->bird_id])->all();
+        foreach ($st_con as $key) {
+                    $key->delete();
+                }
+        if($bird->link!="noimage.png")
+        unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
         $bird->delete();
         return $this->goHome();
     }
