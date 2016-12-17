@@ -87,7 +87,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-right"> &copy; <?= date('Y') ?> <a href="info.php">Разработано лабораторией программных систем</p></a>
+        <p class="pull-right"> &copy; <?= date('Y') ?> <a href="index.php?r=site/info.php">Разработано лабораторией программных систем</p></a>
     </div>
 </footer>
 

@@ -1,1 +1,0 @@
-<h1 style="text-align: center;">Это сделал я, вот и всё...</h1>
