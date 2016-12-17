@@ -14,6 +14,7 @@ $this->title = 'Birds System';
     background: rgba(255, 255, 255, 0);
 }
 </style>
+
 <div class="site-index">
 
     <div class="jumbotron">

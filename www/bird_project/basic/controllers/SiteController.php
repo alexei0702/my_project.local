@@ -86,8 +86,14 @@ class SiteController extends Controller
             'pagination' => $pagination,
         ]);
     }
+    /**********************
+    ***********************
+    *********************/
 
-
+    public function actionAbout()
+    {
+         return $this->render('info');
+    }
 
     /**********************
     ***********************
