@@ -1,18 +1,26 @@
 <h1 align="center">О нас</h1><br>
-<p align="center">Тут будет важный текст</p>
+<p align="center">Важная инфа и красивый текст</p>
 <style>
+body
+{
+  background: #DAD7D7;
+}
 .item
 {
-  height: 360px;
+  height: 500px;
 }
-  .carousel
-  {
-    height: 360px;
-    width: 500px !important;
-  }
+.carousel
+{
+  height: 500px;
+  width: 800px !important;
+}
+.carousel-indicators
+{
+  transform: translate(350px,-435px);
+}
 </style>
 <div class="row">
-<div class="col-xs-4 col-xs-offset-3">
+<div class="col-xs-offset-2">
 <div id="authorCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -26,21 +34,21 @@
     <div class="item active">
       <img src="images/1.jpg" alt="photos-1">
       <div class="carousel-caption">
-        <h3>Алексей Ефимов</h3>
+        <h4>Алексей Ефимов</h4>
         <p>Frontend,Backend,Design(нет)</p>
      </div>
     </div>
     <div class="item">
       <img src="images/2.jpg" alt="photos-2">
       <div class="carousel-caption">
-        <h3>Хабитуев Баир Викторович</h3>
+        <h4>Хабитуев Баир Викторович</h4>
         <p>Консультант, духовный вдохновитель</p>
       </div>
     </div>
     <div class="item">
       <img src="images/3.jpg" alt="photos-3">
       <div class="carousel-caption">
-        <h3>Человек собиравший инфу о птичках</h3>
+        <h4>Человек собиравший инфу о птичках</h4>
         <p>Просто молодец!</p>
       </div>
     </div>
