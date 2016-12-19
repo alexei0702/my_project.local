@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
 
 </style>
 
-<h1 style="text-align: center;">Birds create</h1>
+<h1 style="text-align: center;">Создание</h1>
 
 <?php $form = ActiveForm::begin(['options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
 
@@ -94,7 +94,7 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 ?>
 </div>
 <div class="col-lg-2">
-<button class="btn btn-lg btn-default form-group" type="submit">add</button>
+<button class="btn btn-lg btn-default form-group" id="add">add</button>
 </div>
 <div class="clearfix"></div>
 <br>

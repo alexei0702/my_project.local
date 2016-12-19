@@ -3,25 +3,25 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
-$this->title = 'Population';
+$this->title = 'Популяция';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h1>Population</h1>
+<h1>Популяция</h1>
 <br>
 <p>	
-	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Create new population</a>        
+	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Добавить популяцию</a>        
     </p>
 
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>#</th>
-<th>Designations</th>
-<th>Population</th>
-<th>Description</th>
-<th>Demention</th>
-<th>Action</th>
+<th>Обозначения</th>
+<th>Популяция</th>
+<th>Описание</th>
+<th>Количество</th>
+<th>Действие</th>
 </tr>
 </thead>
 <tbody>

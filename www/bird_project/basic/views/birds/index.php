@@ -25,19 +25,19 @@ $this->title = 'Birds System';
 
         <div class="row">
             <div class="col-lg-4 alert alert-success">
-                <h2>Show all birds</h2>
+                <h2>Показать всех птиц</h2>
                 <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/views-birds">Show</a></p>
+                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/views-birds">Нажми</a></p>
             </div>
             <div class="col-lg-4 alert alert-danger">
-                <h2>Create new birds</h2>
+                <h2>Добавить птицу</h2>
                 <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-bird">Create</a></p>
+                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-bird">Нажми</a></p>
             </div>
             <div class="col-lg-4 alert alert-info">
-                <h2>Create/edit/delete other</h2>
+                <h2>Семейства, отряды и т.д.</h2>
                 <br>
-                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-edit">Click</a></p>
+                <p><a class="btn btn-lg btn-info" href="index.php?r=birds/create-edit">Нажми</a></p>
             </div>
         </div>
 

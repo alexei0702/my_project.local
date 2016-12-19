@@ -1,9 +1,9 @@
-<h1 align="center">О нас</h1><br>
-<p align="center">Важная инфа и красивый текст</p>
+<h1 align="center">Над проектом работали</h1><br>
 <style>
 body
 {
   background: #DAD7D7;
+  color: #000;
 }
 .item
 {

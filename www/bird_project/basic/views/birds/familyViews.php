@@ -10,16 +10,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1>Family</h1>
 <br>
 <p>	
-	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Create new family</a>        
+	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Добавить семейство</a>        
     </p>
 
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>#</th>
-<th>Name</th>
-<th>Name Lat</th>
-<th>Action</th>
+<th>Имя</th>
+<th>Имя на латинском</th>
+<th>Действие</th>
 </tr>
 </thead>
 <tbody>

@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<span class="glyphicon glyphicon-plane"></span> Birds',
+        'brandLabel' => '<span class="glyphicon glyphicon-plane"></span> Птички',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,12 +40,12 @@ AppAsset::register($this);
         'items' => [
         ['label' => 'Режим редактирования', 'url' => ['/birds']],
         Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/birds/login']]
+                ['label' => 'Войти', 'url' => ['/birds/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/birds/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -60,12 +60,12 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
         Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/birds/login']]
+                ['label' => 'Войти', 'url' => ['/birds/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/birds/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

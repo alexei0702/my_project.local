@@ -7,45 +7,24 @@ use app\models\Kind;
 use app\models\Status;
 use app\models\StatusConnect;
 
-$this->title = 'Birds';
+$this->title = 'Птички';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  font: 20px sans-serif;
-}
-table
-{
-  width: 100%;
-  border-collapse: collapse;
-}
-th,td 
-{
-  padding: 5px 10px;
-}
-.container
-{
-  width: 100%;
-}
-</style>
-<h1>Birds</h1>
+<h1>Птички</h1>
 <br>
 <p>
-        <?= Html::a('Create Bird', ['create-bird'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('Добавить', ['create-bird'], ['class' => 'btn btn-info']) ?>
 </p>
 
 <table class="table table-striped table-hover table-bordered">
 <thead>
 <tr>
 <th>#</th>
-<th>Name</th>
-<th>Squad</th>
-<th>Family</th>
-<th>Kind</th>
-<th>Action</th>
+<th>Имя</th>
+<th>Отряд</th>
+<th>Семейство</th>
+<th>Род</th>
+<th>Действие</th>
 </tr>
 </thead>
 <tbody>

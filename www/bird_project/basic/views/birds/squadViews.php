@@ -3,23 +3,23 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
-$this->title = 'squad';
+$this->title = 'Отряд';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h1>Squad</h1>
+<h1>Отряд</h1>
 <br>
 <p>	
-	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Create new squad</a>        
+	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Добавить Отряд</a>        
     </p>
 
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>#</th>
-<th>Name</th>
-<th>Name Lat</th>
-<th>Action</th>
+<th>Имя</th>
+<th>Имя на латинском</th>
+<th>Действие</th>
 </tr>
 </thead>
 <tbody>
