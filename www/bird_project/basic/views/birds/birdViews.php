@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1 style="text-align: center;">Птичка</h1>
 <br>
 <div class="col-lg-4">
-<img src="<?= '/bird_project/basic/upload/'.$bird->link?>" width="400" class="img-rounded img-responsive" alt="111">
+<img src="<?= '/basic/upload/'.$bird->link?>" width="400" class="img-rounded img-responsive" alt="111">
 </div>
 <div class="col-lg-8">
 <table class="table table-striped table-hover">
@@ -71,6 +71,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </tbody>
 </table>
 </div>
-<a href="/bird_project/basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>" class="btn btn-primary" title="Update" aria-label="Update" data-pjax="0">Обновить</a>
+<a href="/basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>" class="btn btn-primary" title="Update" aria-label="Update" data-pjax="0">Обновить</a>
     
- <a href="/bird_project/basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>" class="btn btn-danger" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0">Удалить</a>
+ <a href="/basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>" class="btn btn-danger" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0">Удалить</a>

@@ -106,8 +106,23 @@ class SiteController extends Controller
             if($bird)
             {
                 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
+                if($squad===null){
+                    $squad = new Family();
+                    $squad->squad_name = "Отряд";
+                    $squad->squad_name_lat = "удален!";
+                }
                 $family = Family::find()->where(['family_id' => $bird->family_id])->one();
+                if($family===null){
+                    $family = new Family();
+                    $family->family_name = "Семейство";
+                    $family->family_name_lat = "удалено!";
+                }
                 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
+                if($kind===null){
+                    $kind = new Family();
+                    $kind->kind_name = "Род";
+                    $kind->kind_name_lat = "удален!";
+                }
                 $statusCon = StatusConnect::find()->where(['bird_id' => $bird->bird_id])->all();
                 $popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->all();
                 return $this->render('birdViews', ['bird' => $bird,'squad' => $squad, 'family' => $family, 'kind' => $kind, 'statusCon' => $statusCon, 'popul_con' => $popul_con]);

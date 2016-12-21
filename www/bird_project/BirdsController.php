@@ -142,7 +142,7 @@ public function actionCreate()
             if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
             {
                 $model->save();
-                return $this->goBack();
+                return $this->redirect(['index']);
             }
             $name = Yii::$app->request->get('name');
             return $this->render($name.'Create', ['model' => $model]);
@@ -208,23 +208,8 @@ public function actionCreateEdit()
             if($bird)
             {
                 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
-                if($squad===null){
-                    $squad = new Family();
-                    $squad->squad_name = "Отряд";
-                    $squad->squad_name_lat = "удален!";
-                }
                 $family = Family::find()->where(['family_id' => $bird->family_id])->one();
-                if($family===null){
-                    $family = new Family();
-                    $family->family_name = "Семейство";
-                    $family->family_name_lat = "удалено!";
-                }
                 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
-                if($kind===null){
-                    $kind = new Family();
-                    $kind->kind_name = "Род";
-                    $kind->kind_name_lat = "удален!";
-                }
                 $statusCon = StatusConnect::find()->where(['bird_id' => $bird->bird_id])->all();
                 $popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->all();
                 return $this->render('birdViews', ['bird' => $bird,'squad' => $squad, 'family' => $family, 'kind' => $kind, 'statusCon' => $statusCon, 'popul_con' => $popul_con]);
@@ -246,7 +231,7 @@ public function actionCreateEdit()
     {
         $this->findModel($id,$name)->delete();
 
-        return $this->goHome();
+        return $this->redirect(['index']);
     }
 
     public function actionUpdate($id,$name)
@@ -255,7 +240,7 @@ public function actionCreateEdit()
         if ($model->load(Yii::$app->request->post()))
         {
             $model->save();
-            return $this->goHome();
+            return $this->redirect(['index']);
         } 
         else 
         {
@@ -296,7 +281,7 @@ public function actionCreateEdit()
         if($bird->link!="noimage.png")
         unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
         $bird->delete();
-        return $this->goHome();
+        return $this->redirect(['index']);
     }
 
     public function actionUpdateBird($id)
@@ -332,7 +317,7 @@ public function actionCreateEdit()
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->goHome();
+               return $this->redirect(['index']);
             }
         } 
         else 

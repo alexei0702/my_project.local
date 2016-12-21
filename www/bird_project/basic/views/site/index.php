@@ -38,12 +38,27 @@ body{
 <?php
 foreach ($birds as $bird): 
 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
+if($squad===null){
+    $squad = new Family();
+    $squad->squad_name = "Отряд";
+    $squad->squad_name_lat = "удален!";
+}
 $family = Family::find()->where(['family_id' => $bird->family_id])->one();
+if($family===null){
+    $family = new Family();
+    $family->family_name = "Семейство";
+    $family->family_name_lat = "удалено!";
+}
 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
+if($kind===null){
+    $kind = new Family();
+    $kind->kind_name = "Род";
+    $kind->kind_name_lat = "удален!";
+}
 ?>
 <div class="col-lg-4 text">
             <a href='index.php?r=site/views-details&id=<?=$bird->bird_id?>'>
-            <img src="<?= '/bird_project/basic/upload/'.$bird->link?>" width="300" class="img-rounded" alt="111"></a>
+            <img src="<?= '/basic/upload/'.$bird->link?>" width="300" class="img-rounded" alt="111"></a>
             <br>
             <?= Html::encode ("{$bird->bird_name} - {$bird->bird_name_lat}") ?><br>
             <?= Html::encode ("{$squad->squad_name} - {$squad->squad_name_lat}") ?> <br>
