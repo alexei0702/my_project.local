@@ -18,6 +18,8 @@ use app\models\Create;
 use yii\data\Pagination;
 use app\models\User;
 use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 class BirdsController extends Controller
 {
@@ -146,7 +148,7 @@ public function actionCreate()
             return $this->render($name.'Create', ['model' => $model]);
         }
         else
-            echo "Ne Rabotaet nifiga";
+            return $this->redirect(['index']);
 }
 
 public function actionCreateEdit()

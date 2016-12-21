@@ -31,8 +31,8 @@ foreach ($edit as $key):
             <th><h3><?= Html::encode ("{$key->squad_name}") ?></h3> </th>
             <th><h3><?= Html::encode ("{$key->squad_name_lat}") ?></h3> </th>
             <th>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->squad_id?>&amp;name=Squad" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->squad_id?>&amp;name=Squad" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->squad_id?>&amp;name=Squad" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->squad_id?>&amp;name=Squad" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
             </th>
         </tr>
 <?php $i++;

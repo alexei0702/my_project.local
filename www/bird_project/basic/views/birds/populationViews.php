@@ -35,8 +35,8 @@ foreach ($edit as $key):
             <th><h3><?= Html::encode ("{$key->population_description}") ?></h3> </th>
             <th><?= Html::encode ("{$key->population_dimension_start}") ?>-<?= Html::encode ("{$key->population_dimension_end}") ?> </th>
             <th>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->population_id?>&amp;name=Population" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->population_id?>&amp;name=Population" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->population_id?>&amp;name=Population" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->population_id?>&amp;name=Population" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
             </th>
         </tr>
 <?php $i++;

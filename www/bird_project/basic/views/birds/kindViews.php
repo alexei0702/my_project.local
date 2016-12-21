@@ -7,7 +7,7 @@ $this->title = 'Род';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h1>Kind</h1>
+<h1>Род</h1>
 <br>
 <p>	
 	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger"> Добавить Род</a>        
@@ -31,8 +31,8 @@ foreach ($edit as $key):
             <th><h3><?= Html::encode ("{$key->kind_name}") ?></h3> </th>
             <th><h3><?= Html::encode ("{$key->kind_name_lat}") ?></h3> </th>
             <th>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->kind_id?>&amp;name=Kind" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->kind_id?>&amp;name=Kind" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fupdate&amp;id=<?=$key->kind_id?>&amp;name=Kind" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="/basic/web/index.php?r=birds%2Fdelete&amp;id=<?=$key->kind_id?>&amp;name=Kind" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
             </th>
         </tr>
 <?php $i++;
