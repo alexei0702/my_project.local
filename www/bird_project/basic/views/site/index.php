@@ -31,7 +31,7 @@ body{
 }
 </style>
 <div class="jumbotron">
-<h1 class="head">Птички</h1>
+<h1 class="head">Электронная база данных птиц Юга Восточной Сибири</h1>
 <br>
 <br>
 <div class="row">
