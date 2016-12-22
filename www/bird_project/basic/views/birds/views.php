@@ -31,8 +31,23 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $i=1;
 foreach ($birds as $bird): 
 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
+if($squad===null){
+    $squad = new Squad();
+    $squad->squad_name = "Отряд";
+    $squad->squad_name_lat = "удален!";
+}
 $family = Family::find()->where(['family_id' => $bird->family_id])->one();
+if($family===null){
+    $family = new Family();
+    $family->family_name = "Семейство";
+    $family->family_name_lat = "удалено!";
+}
 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
+if($kind===null){
+    $kind = new Kind();
+    $kind->kind_name = "Род";
+    $kind->kind_name_lat = "удален!";
+}
 ?>
 	    <tr>
             <td><?=$i?></td>

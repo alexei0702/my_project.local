@@ -42,7 +42,7 @@ class BirdsController extends Controller
         'allow' => true, 
         'roles' => ['@'], 
         ], 
-        [   'actions' => ['update','delete','update-bird','delete-bird'], 
+        [   'actions' => ['update','update-bird','delete-bird'], 
         'allow' => true,
         'matchCallback' => function ($rule, $action) {
                             $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
@@ -58,6 +58,17 @@ class BirdsController extends Controller
                                     return true;
                                 else
                                     return false;
+                            }
+                        }
+        ],
+        [   'actions' => ['delete'], 
+        'allow' => true,
+        'matchCallback' => function ($rule, $action) {
+                            $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
+                            if($status==2)
+                                return true;    
+                            else{
+                                return false;
                             }
                         }
         ],
@@ -209,7 +220,7 @@ public function actionCreateEdit()
             {
                 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
                 if($squad===null){
-                    $squad = new Family();
+                    $squad = new Squad();
                     $squad->squad_name = "Отряд";
                     $squad->squad_name_lat = "удален!";
                 }
@@ -221,7 +232,7 @@ public function actionCreateEdit()
                 }
                 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
                 if($kind===null){
-                    $kind = new Family();
+                    $kind = new Kind();
                     $kind->kind_name = "Род";
                     $kind->kind_name_lat = "удален!";
                 }
@@ -246,7 +257,7 @@ public function actionCreateEdit()
     {
         $this->findModel($id,$name)->delete();
 
-        return $this->goHome();
+        return $this->redirect(['index']);
     }
 
     public function actionUpdate($id,$name)
@@ -255,7 +266,7 @@ public function actionCreateEdit()
         if ($model->load(Yii::$app->request->post()))
         {
             $model->save();
-            return $this->goHome();
+            return $this->redirect(['index']);
         } 
         else 
         {
@@ -296,7 +307,7 @@ public function actionCreateEdit()
         if($bird->link!="noimage.png")
         unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
         $bird->delete();
-        return $this->goHome();
+        return $this->redirect(['index']);
     }
 
     public function actionUpdateBird($id)
@@ -332,7 +343,7 @@ public function actionCreateEdit()
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->goHome();
+                return $this->redirect(['index']);
             }
         } 
         else 

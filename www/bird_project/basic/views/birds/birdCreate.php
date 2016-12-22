@@ -93,9 +93,9 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
     echo $form->field($popul_con, 'place_id',['inputOptions' => ['class' => 'form-control']])->dropDownList($items,$params)->label('');
 ?>
 </div>
-<div class="col-lg-2">
+<!-- <div class="col-lg-2">
 <button class="btn btn-lg btn-default form-group" id="add">add</button>
-</div>
+</div> -->
 <div class="clearfix"></div>
 <br>
 <?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>

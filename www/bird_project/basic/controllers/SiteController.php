@@ -107,7 +107,7 @@ class SiteController extends Controller
             {
                 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
                 if($squad===null){
-                    $squad = new Family();
+                    $squad = new Squad();
                     $squad->squad_name = "Отряд";
                     $squad->squad_name_lat = "удален!";
                 }
@@ -119,7 +119,7 @@ class SiteController extends Controller
                 }
                 $kind = Kind::find()->where(['kind_id' => $bird->kind_id])->one();
                 if($kind===null){
-                    $kind = new Family();
+                    $kind = new Kind();
                     $kind->kind_name = "Род";
                     $kind->kind_name_lat = "удален!";
                 }
