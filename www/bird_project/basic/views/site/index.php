@@ -22,7 +22,7 @@ body{
 
 .head
 {
-	text-align: center;
+	text-align: center;    
 	color : #061C4E !important;
 }
 .text
@@ -30,8 +30,9 @@ body{
 	color : #0C6339	;
 }
 </style>
+
 <div class="jumbotron">
-<h1 class="head">Электронная база данных птиц Юга Восточной Сибири</h1>
+<h2 class="head">Электронная база данных птиц Юга Восточной Сибири</h2>
 <br>
 <br>
 <div class="row">

@@ -12,11 +12,13 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<?php $this->title = "Birds"; ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -27,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<span class="social social-github"></span> Птички',
+        'brandLabel' => '<i class="fa fa-twitter" aria-hidden="true"></i> Птички',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -38,6 +40,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+        '<li>'
+                . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
+                . Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                . Html::submitButton(
+                    'Поиск',
+                    ['class' => 'btn']
+                )
+                . Html::endForm()
+                . '</li>',
         ['label' => 'Режим редактирования', 'url' => ['/birds']],
         Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/birds/login']]
@@ -59,6 +70,15 @@ AppAsset::register($this);
        echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+        '<li>'
+                . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
+                . Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                . Html::submitButton(
+                    'Поиск',
+                    ['class' => 'btn']
+                )
+                . Html::endForm()
+                . '</li>',
         Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/birds/login']]
             ) : (
