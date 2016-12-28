@@ -24,6 +24,12 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+<style>
+    .input2
+    {
+        background-color:transparent;
+    }
+</style>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -42,10 +48,11 @@ AppAsset::register($this);
         'items' => [
         '<li>'
                 . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
-                . Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                . Html::input('text', 'query', Yii::$app->request->post('string'), ['class' => 'form-control input1','id' => 'form', 'placeholder' => 'Поиск'])
+                . ' '
                 . Html::submitButton(
                     'Поиск',
-                    ['class' => 'btn']
+                    ['class' => 'btn btn-warning']
                 )
                 . Html::endForm()
                 . '</li>',
@@ -72,7 +79,8 @@ AppAsset::register($this);
         'items' => [
         '<li>'
                 . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
-                . Html::input('text', 'string', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                . Html::input('text', 'query', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                .' '
                 . Html::submitButton(
                     'Поиск',
                     ['class' => 'btn']
