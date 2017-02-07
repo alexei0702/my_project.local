@@ -53,7 +53,7 @@ class BirdsController extends Controller
                                 $id_m = Yii::$app->request->get('id');
                                 $name = Yii::$app->request->get('name');
                                 $fullName = '\app\models\\'.$name;
-                                $id = $fullName::find()->where(['$name_id' => $id_m])->one();
+                                $id = $fullName::find()->where([$name.'_id' => $id_m])->one();
                                 if($id['author']==$id_us)
                                     return true;
                                 else
@@ -88,7 +88,7 @@ public function actionViewsBirds()
     $query = Bird::find();
 
     $pagination = new Pagination([
-            'defaultPageSize' => 2,
+            'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
@@ -313,8 +313,9 @@ public function actionCreateEdit($modelName)
     {
         $bird = $this->findModelBird($id);
         $link_old=$bird->link;
-        $popul_con = new PopulationConnect();
-        $st_con = new StatusConnect();
+        $popul_con = $this->findModelPopulation($id);
+        $st_con = $this->findModelStatus($id);
+        
         if ($st_con->load(Yii::$app->request->post())&&$popul_con->load(Yii::$app->request->post())&&$bird->load(Yii::$app->request->post()))
         {
             $link = UploadedFile::getInstance($bird, 'link');
@@ -360,6 +361,28 @@ public function actionCreateEdit($modelName)
     protected function findModelBird($id)
     {
         if (($model = Bird::findOne($id)) !== null) 
+        {
+            return $model;
+        } 
+        else 
+        {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function findModelPopulation($id)
+    {
+        if (($model = PopulationConnect::find()->where(['bird_id'=>$id])->one()) !== null) 
+        {
+            return $model;
+        } 
+        else 
+        {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function findModelStatus($id)
+    {
+        if (($model = StatusConnect::find()->where(['bird_id'=>$id])->all()) !== null) 
         {
             return $model;
         } 

@@ -69,6 +69,6 @@ require_once ('menu.php');
 </tbody>
 </table>
 </div>
-<a href="/basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>" title="Update" aria-label="Update" data-pjax="0"><button class="bttn-float bttn-md bttn-primary">Обновить</button></a>
+<a href="/basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Update" aria-label="Update" data-pjax="0"><button class="bttn-float bttn-md bttn-primary">Обновить</button></a>
 
- <a href="/basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><button class="bttn-float bttn-md bttn-danger">Удалить</button></a> 
+ <a href="/basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><button class="bttn-float bttn-md bttn-danger">Удалить</button></a> 
