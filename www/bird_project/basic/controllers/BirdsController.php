@@ -195,7 +195,7 @@ public function actionCreateEdit($modelName)
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->redirect(['index']);
+                return $this->redirect(['views-birds']);    
             }
         }
         $squad = Squad::find()->all();
@@ -306,16 +306,23 @@ public function actionCreateEdit($modelName)
         if($bird->link!="noimage.png")
         unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
         $bird->delete();
-        return $this->redirect(['index']);
+        return $this->redirect(['views-birds']);
     }
 
     public function actionUpdateBird($id)
     {
         $bird = $this->findModelBird($id);
         $link_old=$bird->link;
-        $popul_con = $this->findModelPopulation($id);
-        $st_con = $this->findModelStatus($id);
-        
+        $popul_con = new PopulationConnect();
+        $st_con = new StatusConnect();
+        $popul_con_old = PopulationConnect::find()->where(['bird_id'=>$id])->one();
+        $popul_con->population_id = $popul_con_old->population_id;
+        $popul_con->place_id = $popul_con_old->place_id;
+        $st_con_old = StatusConnect::find()->where(['bird_id'=>$id])->all();
+            foreach ($st_con_old as $st) {
+                $status_list[] = $st->status_id;
+            }
+        $st_con->status_id = $status_list;
         if ($st_con->load(Yii::$app->request->post())&&$popul_con->load(Yii::$app->request->post())&&$bird->load(Yii::$app->request->post()))
         {
             $link = UploadedFile::getInstance($bird, 'link');
@@ -343,7 +350,7 @@ public function actionCreateEdit($modelName)
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->redirect(['index']);
+                return $this->redirect(['views-birds']);
             }
         } 
         else 
@@ -366,32 +373,8 @@ public function actionCreateEdit($modelName)
         } 
         else 
         {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('The requested bird does not exist.');
         }
-    }
-    protected function findModelPopulation($id)
-    {
-        if (($model = PopulationConnect::find()->where(['bird_id'=>$id])->one()) !== null) 
-        {
-            return $model;
-        } 
-        else 
-        {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-    protected function findModelStatus($id)
-    {
-        if (($model = StatusConnect::find()->where(['bird_id'=>$id])->all()) !== null) 
-        {
-            return $model;
-        } 
-        else 
-        {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    
+    }   
 }
 ?>
