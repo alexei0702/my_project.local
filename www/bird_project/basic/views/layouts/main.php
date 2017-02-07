@@ -1,14 +1,11 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -19,17 +16,17 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/bttn.min.css">
+    <link rel="stylesheet" href="css/btnToTop.css">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
-<style>
-    .input2
-    {
-        background-color:transparent;
-    }
-</style>
+
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -47,12 +44,12 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
         '<li>'
-                . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
-                . Html::input('text', 'query', Yii::$app->request->post('string'), ['class' => 'form-control input1','id' => 'form', 'placeholder' => 'Поиск'])
+                . Html::beginForm(['/site/search'], 'post', ['class' => 'navbar-form navbar-left'])
+                . Html::input('text', 'query', Yii::$app->request->post('query'), ['class' => 'form-control input1', 'placeholder' => 'Поиск'])
                 . ' '
                 . Html::submitButton(
                     'Поиск',
-                    ['class' => 'btn btn-warning']
+                    ['class' => 'btn']
                 )
                 . Html::endForm()
                 . '</li>',
@@ -78,8 +75,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
         '<li>'
-                . Html::beginForm(['/birds/search'], 'post', ['class' => 'navbar-form navbar-left'])
-                . Html::input('text', 'query', Yii::$app->request->post('string'), ['class' => 'form-control','id' => 'form'])
+                . Html::beginForm(['/site/search'], 'post', ['class' => 'navbar-form navbar-left'])
+                . Html::input('text', 'query', Yii::$app->request->post('query'), ['class' => 'form-control','placeholder' => 'Поиск'])
                 .' '
                 . Html::submitButton(
                     'Поиск',
@@ -104,8 +101,9 @@ AppAsset::register($this);
     }
     NavBar::end();
     ?>
-
+    
     <div class="container">
+    <button class="bttn-material-circle bttn-lg bttn-primary" id = "toTop" ><span class="glyphicon glyphicon-chevron-up"></span></button>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -115,11 +113,12 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-right"> &copy; <?= date('Y') ?> <a href="index.php?r=site/about">Разработано лабораторией программных систем</p></a>
+        <p class="pull-right"> &copy; <?= date('Y') ?> <!-- <a href="index.php?r=site/about"> -->Разработано лабораторией программных систем</p><!-- </a> -->
     </div>
 </footer>
-
 <?php $this->endBody() ?>
+<script src="js/menu.js" defer></script> 
+<script src="js/btnToTop.js" defer></script>
 </body>
 </html>
 <?php $this->endPage() ?>

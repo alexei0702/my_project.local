@@ -162,17 +162,16 @@ public function actionCreate()
             return $this->redirect(['index']);
 }
 
-public function actionCreateEdit()
+public function actionCreateEdit($modelName)
 {
-    $create = new Create();
-    if(Yii::$app->request->isPost&&$create->load(Yii::$app->request->post()))
+    if(Yii::$app->request->get('modelName'))
     {
-        $name='\app\models\\'.$create->modelName;
+        $name='\app\models\\'.Yii::$app->request->get('modelName');
         $edit = $name::find()->all();
-        $name = $create->modelName;
-        return $this->render($create->modelName.'Views', ['edit' => $edit,'name' => $name]);
+        $name = Yii::$app->request->get('modelName');
+        return $this->render($name.'Views', ['edit' => $edit,'name' => $name]);
     }
-    return $this->render('create', ['create' => $create]);
+    return $this->goBack();
 }
 
     public function actionCreateBird()

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-
+require_once ('menu.php');
 ?>
 <style>
 .width
@@ -99,5 +99,5 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 <div class="clearfix"></div>
 <br>
 <?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>
-<button class="btn btn-lg btn-primary form-group" type="submit">Сохранить</button>
+<button class="bttn-fill bttn-lg bttn-primary form-group" type="submit">Сохранить</button>
 <?php ActiveForm::end() ?>

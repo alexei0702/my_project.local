@@ -2,17 +2,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
-
-$this->title = 'Статус';
-$this->params['breadcrumbs'][] = $this->title;
-
+require_once ('menu.php');
 ?>
 <h1>Статус</h1>
 <br>
 <p>	
-	<a href='index.php?r=birds/create&name=<?= $name?>' class="btn btn-danger">Добавить статус</a>        
+	<a href='index.php?r=birds/create&name=<?= $name?>'><button class="bttn-unite bttn-md bttn-danger">Добавить статус</button></a>        
     </p>
-
 <table class="table table-striped table-bordered">
 <thead>
 <tr>

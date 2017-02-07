@@ -1,0 +1,9 @@
+/* Кнопка для позвращения на верх */
+#toTop {
+    padding:5px;
+    position:fixed;
+    bottom:30px; /* отступ кнопки от нижнего края страницы*/
+    right:30px;
+    cursor:pointer;
+    display:none;
+}

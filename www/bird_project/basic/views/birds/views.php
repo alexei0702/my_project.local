@@ -7,15 +7,14 @@ use app\models\Kind;
 use app\models\Status;
 use app\models\StatusConnect;
 
-$this->title = 'Птички';
-$this->params['breadcrumbs'][] = $this->title;
+require_once ('menu.php');
 ?>
 <h1>Птички</h1>
 <br>
 <p>
-        <?= Html::a('Добавить', ['create-bird'], ['class' => 'btn btn-info']) ?>
+        <a href="index.php?r=birds/create-bird"><button class="bttn-unite bttn-md bttn-primary">Добавить</button></a>
 </p>
-
+<br>
 <table class="table table-striped table-hover table-bordered">
 <thead>
 <tr>

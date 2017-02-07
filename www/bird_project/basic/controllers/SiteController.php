@@ -1,7 +1,5 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -18,6 +16,7 @@ use app\models\Place;
 use app\models\PopulationConnect;
 use app\models\StatusConnect;
 use app\models\Population;
+use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
@@ -46,7 +45,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -62,7 +60,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
     /**
      * Displays homepage.
      *
@@ -71,30 +68,42 @@ class SiteController extends Controller
     public function actionIndex()
     {
          $query = Bird::find();
-
-    $pagination = new Pagination([
+        $pagination = new Pagination([
             'defaultPageSize' => 3,
             'totalCount' => $query->count(),
         ]);
-
-    $birds = $query->orderBy('bird_name')
+        $birds = $query->orderBy('bird_name')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-    return $this->render('index', [
+        $display = 1;
+        return $this->render('index', [
             'birds' => $birds,
             'pagination' => $pagination,
+            'display' => $display,
         ]);
     }
     /**********************
     ***********************
     *********************/
-
+    public function actionAllBirds()
+    {
+        $query = Bird::find();
+        $birds = $query->orderBy('bird_name')
+            ->all();
+        $display = 0;
+        return $this->render('index', [
+            'birds' => $birds,
+            'display' => $display,
+        ]);
+    }
+    /**********************
+    ***********************
+    *********************/
     public function actionAbout()
     {
          return $this->render('info');
     }
-
     /**********************
     ***********************
     *********************/
@@ -139,49 +148,48 @@ class SiteController extends Controller
             die;
         }
     }
-
-    public function actionSearch($query)
+    public function actionSearch()
     {
-        $query = trim($query); 
-        $query = mysql_real_escape_string($query);
-        $query = htmlspecialchars($query);
-
+        if (!empty($_POST['query'])) 
+        {
+            $query = Yii::$app->request->post('query');  
+            $query = trim($query); 
+            //$query = htmlspecialchars($query);
             if (strlen($query) < 3) {
-                $text = '<p>Слишком короткий поисковый запрос.</p>';
-            } else if (strlen($query) > 128) {
-                $text = '<p>Слишком длинный поисковый запрос.</p>';
-            } else { 
-                $q = "SELECT `page_id`, `title`, `desc`, `title_link`, `category`, `uniq_id`
-                      FROM `table_name` WHERE `text` LIKE '%$query%'
-                      OR `title` LIKE '%$query%' OR `meta_k` LIKE '%$query%'
-                      OR `meta_d` LIKE '%$query%'";
-
-                $result = mysql_query($q);
-
-                if (mysql_affected_rows() > 0) { 
-                    $row = mysql_fetch_assoc($result); 
-                    $num = mysql_num_rows($result);
-
-                    $text = '<p>По запросу <b>'.$query.'</b> найдено совпадений: '.$num.'</p>';
-
-                    do {
-                        // Делаем запрос, получающий ссылки на статьи
-                        $q1 = "SELECT `link` FROM `table_name` WHERE `uniq_id` = '$row[page_id]'";
-                        $result1 = mysql_query($q1);
-
-                        if (mysql_affected_rows() > 0) {
-                            $row1 = mysql_fetch_assoc($result1);
-                        }
-
-                        $text .= '<p><a> href="'.$row1['link'].'/'.$row['category'].'/'.$row['uniq_id'].'" title="'.$row['title_link'].'">'.$row['title'].'</a></p>
-                        <p>'.$row['desc'].'</p>';
-
-                    } while ($row = mysql_fetch_assoc($result)); 
-                } else {
-                    $text = '<p>По вашему запросу ничего не найдено.</p>';
+                throw new NotFoundHttpException('Слишком короткий поисковый запрос.');
+             } 
+             else 
+            if (strlen($query) > 128) {
+                    throw new NotFoundHttpException('Слишком длинный поисковый запрос.');
+             } 
+             else { 
+                $q = Bird::find()->orWhere(['like','bird_name', $query])->orWhere(['like','bird_name_lat',$query])->orWhere(['like','propagation',$query])->orWhere(['like','migration',$query])->orWhere(['like','habitat',$query]);
+                $num = $q->count();
+                if ($num>0) { 
+                        $pagination = new Pagination([
+                            'defaultPageSize' => 3,
+                            'totalCount' => $num,
+                            ]);
+                        $birds = $q->orderBy('bird_name')
+                            ->offset($pagination->offset)
+                            ->limit($pagination->limit)
+                            ->all();
+                        return $this->render('search', [
+                            'birds' => $birds,
+                            'pagination' => $pagination,
+                            'query' => $query,
+                            'num' => $num,
+                            ]);
+                    }
+                else
+                {
+                    throw new NotFoundHttpException('Нету.');
                 }
-            } 
-
-        return $text; 
-    }   
+               }
+            }
+            else
+            {
+                throw new NotFoundHttpException('Нету.');
+            }
+      }
 }

@@ -18,26 +18,23 @@ body{
 {
     background: rgba(255, 255, 255, 0);
 }
+.head
+{
+    text-align: center;    
+    color : #061C4E !important;
+}
 .text
 {
     color : #0C6339 ;
 }
-
 </style>
-<div class="banner">
-    <h1 class="banner-head">
-        Электронная база данных птиц<br>    
-        Юга Восточной Сибири
-    </h1>
-</div>
-<?php if($display==0): ?>
-<p class="text-right"><a href="index.php?r=site/index"><button class="bttn-minimal bttn-sm bttn-primary">Показывать по 3</button></a></p> 
-<?php else: ?>
-<p class="text-right"><a href="index.php?r=site/all-birds"><button class="bttn-minimal bttn-sm bttn-primary">Показать лентой</button></a></p>
-<?php endif; ?>
+
+<div class="jumbotron">
+<h2 class="head">По запросу <b><?=$query?></b> найдено совпадений: <?=$num?></h2>
+<br>
+<br>
 <div class="row">
 <?php
-$i=0;
 foreach ($birds as $bird): 
 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
 if($squad===null){
@@ -57,14 +54,10 @@ if($kind===null){
     $kind->kind_name = "Род";
     $kind->kind_name_lat = "удален!";
 }
-if($i%3==0):
 ?>
-</div>
-<div class="row">
-<?php endif; ?>
-<div class="col-md-4 text">
+<div class="col-lg-4 text">
             <a href='index.php?r=site/views-details&id=<?=$bird->bird_id?>'>
-            <img src="<?='/bird_project/basic/upload/'.$bird->link?>" width="300" class="img-rounded" alt="111"></a>
+            <img src="<?= '/basic/upload/'.$bird->link?>" width="300" class="img-rounded" alt="111"></a>
             <br>
             <?= Html::encode ("{$bird->bird_name} - {$bird->bird_name_lat}") ?><br>
             <?= Html::encode ("{$squad->squad_name} - {$squad->squad_name_lat}") ?> <br>
@@ -72,11 +65,9 @@ if($i%3==0):
             <?= Html::encode ("{$kind->kind_name} - {$kind->kind_name_lat}") ?> <br>
 </div>
 <?php 
-$i++;
  endforeach;
  ?>
  </div>
+ </div>
 <div class="clear-fix"></div>
-<?php if($display): ?>
 <?= LinkPager::widget(['pagination' => $pagination]) ?>
-<?php endif; ?>
