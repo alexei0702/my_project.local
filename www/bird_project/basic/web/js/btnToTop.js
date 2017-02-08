@@ -2,7 +2,7 @@ $(document).ready(function() {
  
 $(window).scroll(function() {
  
-if($(this).scrollTop() != 0) {
+if($(this).scrollTop() > 100) {
  
 $('#toTop').fadeIn();
  

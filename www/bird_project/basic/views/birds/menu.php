@@ -18,7 +18,7 @@
 <button class="bttn-material-circle bttn-md bttn-primary" id="menu-btn"><span class="glyphicon glyphicon-th-list"></span></button>
 <div class="well sidebar-nav" style="display: none;" id="menu">
     <h3 align="center" class="menu">Меню</h3>
-      <ul class="nav nav-list">
+    <ul class="nav nav-list">
         <li><a href="index.php?r=birds/views-birds"><button class="bttn-minimal bttn-sm bttn-primary">Показать всех птиц</button></a></li>
         <li><a href="index.php?r=birds/create-bird"><button class="bttn-minimal bttn-sm bttn-primary">Добавить птицу</button></a></li>
     </ul>

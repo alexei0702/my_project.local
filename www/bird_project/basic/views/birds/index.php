@@ -3,7 +3,6 @@
 /* @var $this yii\web\View */
 
 $this->title = 'Birds System';
-require_once ('menu.php');
 ?>
 <style type="text/css">
     body{
@@ -14,31 +13,51 @@ require_once ('menu.php');
 {
     background: rgba(255, 255, 255, 0);
 }
-p.info
-{
-    font-family: fantasy;
-    font-size: 28px;
-}
-p.info-sm
-{
-    font-family: COMIC SANS MS;
-    font-size: 20px;
-}
-h1
-{
-    font-family: MV BOLI;
-}
 </style>
 
 <div class="site-index">
-
     <div class="jumbotron">
         <h1>Режим разработчика!</h1>
     </div>
-
     <div class="body-content">
-        <p class="info text-center">Добро пожаловать в режим редактирования.</p>
-        <p class="info-sm text-center">Здесь вы можете добавить новые данные в базу или изменить уже существующие.</p>
-        <p class="info-sm text-center">Для переключения между страницами используйте меню (кнопка в верхнем левом углу).</p>
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-3 alert alert-success">
+                <h3>Показать всех птиц</h3><br>
+                <a href="index.php?r=birds/views-birds"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>
+            </div>
+            <div class="col-lg-3 alert alert-success">
+                <h3>Добавить птицу</h3><br>
+                <a href="index.php?r=birds/create-bird"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>
+            </div>
+        </div>
+        <h2 align="center">Добавить/изменить</h2>
+        <div class="row">
+            <div class="col-lg-4 alert alert-warning">
+                <h3>Семейство</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Family"><button class="bttn-jelly bttn-md bttn-warning">Нажми</button></a>
+            </div>
+            <div class="col-lg-4 alert alert-warning">
+                <h3>Род</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Kind"><button class="bttn-jelly bttn-md bttn-warning">Нажми</button></a>
+            </div>
+            <div class="col-lg-4 alert alert-warning">
+                <h3>Отряд</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Squad"><button class="bttn-jelly bttn-md bttn-warning">Нажми</button></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 alert alert-info">
+                <h3>Статус</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Status"><button class="bttn-jelly bttn-md bttn-primary">Нажми</button></a>
+            </div>
+            <div class="col-lg-4 alert alert-info">
+                <h3>Место</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Place"><button class="bttn-jelly bttn-md bttn-primary">Нажми</button></a>
+            </div>
+            <div class="col-lg-4 alert alert-info">
+                <h3>Численность</h3><br>
+                <a href="index.php?r=birds/create-edit&modelName=Population"><button class="bttn-jelly bttn-md bttn-primary">Нажми</button></a>
+            </div>
+        </div>
     </div>
 </div>
