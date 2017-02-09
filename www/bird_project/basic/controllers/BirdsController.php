@@ -150,12 +150,13 @@ public function actionCreate()
             $name = '\app\models\\'.Yii::$app->request->get('name');
             $model = new $name();
             $model->author = Yii::$app->user->id;
+            $name = Yii::$app->request->get('name');
             if (Yii::$app->request->isPost&&$model->load(Yii::$app->request->post()))
             {
                 $model->save();
-                return $this->goBack();
+                header("Location:index.php?r=birds/create-edit&modelName=".$name); 
+                exit();
             }
-            $name = Yii::$app->request->get('name');
             return $this->render($name.'Create', ['model' => $model]);
         }
         else
@@ -255,8 +256,8 @@ public function actionCreateEdit($modelName)
     public function actionDelete($id,$name)
     {
         $this->findModel($id,$name)->delete();
-
-        return $this->redirect(['index']);
+        header("Location:index.php?r=birds/create-edit&modelName=".$name);
+        exit();
     }
 
     public function actionUpdate($id,$name)
@@ -265,7 +266,8 @@ public function actionCreateEdit($modelName)
         if ($model->load(Yii::$app->request->post()))
         {
             $model->save();
-            return $this->redirect(['index']);
+            header("Location:index.php?r=birds/create-edit&modelName=".$name); 
+            exit();
         } 
         else 
         {
