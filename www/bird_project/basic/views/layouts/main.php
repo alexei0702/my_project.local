@@ -113,7 +113,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-right"> &copy; <?= date('Y') ?> <!-- <a href="index.php?r=site/about"> -->Разработано лабораторией программных систем</p><!-- </a> -->
+        <p class="pull-right"> &copy; <?= date('Y') ?> <a href="http://www.bsu.ru/university/departments/faculties/bgf/">БГФ</a> <a href="http://imi.bsu.ru/">ИМИ</a></p>
     </div>
 </footer>
 <?php $this->endBody() ?>
