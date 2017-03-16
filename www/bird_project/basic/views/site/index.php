@@ -7,6 +7,7 @@ use app\models\Kind;
 use app\models\Status;
 use app\models\StatusConnect;
 ?>
+<?php $this->title = 'Birds'; ?>
 <style>
 body{
     background-image: url('http://www.zastavki.com/pictures/originals/2015/Backgrounds_Silhouette_of_the_bird_on_branch__light_background_102709_.jpg');

@@ -21,6 +21,13 @@ $this->title = 'Birds System';
     </div>
     <div class="body-content">
         <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 alert alert-info">
+                <h3>Добавить статическую страницу</h3><br>
+                <a href="index.php?r=birds/static-page&id=0"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
             <div class="col-lg-3 col-lg-offset-3 alert alert-success">
                 <h3>Показать всех птиц</h3><br>
                 <a href="index.php?r=birds/views-birds"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>

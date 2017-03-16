@@ -10,6 +10,7 @@ use app\models\Squad;
 use app\models\Family;
 use app\models\Kind;
 use app\models\Status;
+use app\models\StaticPage;
 use app\models\Place;
 use app\models\PopulationConnect;
 use app\models\StatusConnect;
@@ -38,14 +39,14 @@ class BirdsController extends Controller
          'roles' => ['?'], 
         ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','static-page'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
         [   'actions' => ['update','update-bird','delete-bird'], 
         'allow' => true,
         'matchCallback' => function ($rule, $action) {
-                            $status=isset($_SESSION['status']) ? $_SESSION['status'] : null;
+                            $status =isset($_SESSION['status']) ? $_SESSION['status'] : null;
                             if($status==2)
                                 return true;    
                             else{
@@ -357,13 +358,13 @@ public function actionCreateEdit($modelName)
         } 
         else 
         {
-        $squad = Squad::find()->all();
-        $family = Family::find()->all();
-        $kind = Kind::find()->all();
-        $status = Status::find()->all();
-        $population = Population::find()->all();
-        $place = Place::find()->all();
-        return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place]);
+            $squad = Squad::find()->all();
+            $family = Family::find()->all();
+            $kind = Kind::find()->all();
+            $status = Status::find()->all();
+            $population = Population::find()->all();
+            $place = Place::find()->all();
+            return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place]);
         }
     }
 
@@ -376,6 +377,39 @@ public function actionCreateEdit($modelName)
         else 
         {
             throw new NotFoundHttpException('The requested bird does not exist.');
+        }
+    }
+
+    /*
+
+    @@
+
+    Создание статических страниц 
+
+    @@
+
+    */
+
+    public function actionStaticPage($id){
+        $page = StaticPage::find()->where(['id'=>$id])->one();
+        if($page == NULL){
+            $page = new StaticPage();
+            if(Yii::$app->request->isPost&&$page->load(Yii::$app->request->post())){
+                $page->save();
+                echo $page->id;
+                //die;
+                header("Location:index.php?r=birds/static-page&id=".$page->id);
+                exit();
+            }
+            return $this->render('createStaticPage', [
+                'page' => $page,
+            ]);
+        }
+        else{
+            return $this->render('staticPage', [
+                'content' => $page->content,
+                'title' => $page->title,
+            ]);
         }
     }   
 }

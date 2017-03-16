@@ -9,7 +9,6 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<?php $this->title = "Birds"; ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
