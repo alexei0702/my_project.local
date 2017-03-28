@@ -83,7 +83,7 @@ public function actionIndex()
 {
     return $this->render('index');
 }
-
+// показ всех птиц
 public function actionViewsBirds()
 {
     $query = Bird::find();
@@ -103,7 +103,7 @@ public function actionViewsBirds()
         ]);
 }
 
-
+//авторизация
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -390,27 +390,16 @@ public function actionCreateEdit($modelName)
 
     */
 
-    public function actionStaticPage($id){
-        $page = StaticPage::find()->where(['id'=>$id])->one();
-        if($page == NULL){
-            $page = new StaticPage();
-            if(Yii::$app->request->isPost&&$page->load(Yii::$app->request->post())){
+    public function actionCreateStaticPage(){
+        $page = new StaticPage();
+        if(Yii::$app->request->isPost&&$page->load(Yii::$app->request->post())){
                 $page->save();
-                echo $page->id;
-                //die;
-                header("Location:index.php?r=birds/static-page&id=".$page->id);
+                header("Location:index.php?r=birds");
                 exit();
-            }
+        }
             return $this->render('createStaticPage', [
                 'page' => $page,
             ]);
-        }
-        else{
-            return $this->render('staticPage', [
-                'content' => $page->content,
-                'title' => $page->title,
-            ]);
-        }
-    }   
+    }
 }
 ?>

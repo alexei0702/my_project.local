@@ -23,7 +23,7 @@ $this->title = 'Birds System';
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4 alert alert-info">
                 <h3>Добавить статическую страницу</h3><br>
-                <a href="index.php?r=birds/static-page&id=0"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>
+                <a href="index.php?r=birds/create-static-page"><button class="bttn-jelly bttn-md bttn-success">Нажми</button></a>
             </div>
         </div>
         <br>

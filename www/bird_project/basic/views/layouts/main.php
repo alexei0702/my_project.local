@@ -118,6 +118,9 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 <script src="js/menu.js" defer></script> 
 <script src="js/btnToTop.js" defer></script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3jZ1PHeLxCwShhwrvsC_rIvE3LfF-Es8&callback=initMap">
+    </script>
 </body>
 </html>
 <?php $this->endPage() ?>
