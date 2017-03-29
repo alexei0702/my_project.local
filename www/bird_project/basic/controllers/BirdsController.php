@@ -25,7 +25,7 @@ use yii\web\NotFoundHttpException;
 class BirdsController extends Controller
 {
 
-        public function behaviors() { 
+    public function behaviors() { 
         $session = Yii::$app->session;
         $session->open();
         return 
@@ -39,7 +39,7 @@ class BirdsController extends Controller
          'roles' => ['?'], 
         ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','static-page'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
@@ -164,6 +164,7 @@ public function actionCreate()
             return $this->redirect(['index']);
 }
 
+
 public function actionCreateEdit($modelName)
 {
     if(Yii::$app->request->get('modelName'))
@@ -176,7 +177,8 @@ public function actionCreateEdit($modelName)
     return $this->goBack();
 }
 
-    public function actionCreateBird()
+
+public function actionCreateBird()
     {
         $bird=new Bird();
         $bird->author = Yii::$app->user->id;
@@ -207,12 +209,12 @@ public function actionCreateEdit($modelName)
         $population = Population::find()->all();
         $place = Place::find()->all();
         return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place]);
-    }
+}
 
     /**********************
     ***********************
     *********************/
-    public function actionViewsDetails($id)
+public function actionViewsDetails($id)
     {
         if($id!=0)
         {
@@ -252,9 +254,9 @@ public function actionCreateEdit($modelName)
             echo "Missing argument";
             die;
         }
-    }
+}
 
-    public function actionDelete($id,$name)
+public function actionDelete($id,$name)
     {
         $this->findModel($id,$name)->delete();
         header("Location:index.php?r=birds/create-edit&modelName=".$name);
@@ -278,7 +280,7 @@ public function actionCreateEdit($modelName)
         }
     }
 
-    protected function findModel($id,$name)
+protected function findModel($id,$name)
     {
         $fullName='\app\models\\'.$name;
         if (($model = $fullName::findOne($id)) !== null) 
@@ -294,7 +296,7 @@ public function actionCreateEdit($modelName)
     /*************************
     *************************
     **************************/
-    public function actionDeleteBird($id)
+public function actionDeleteBird($id)
     {
         $bird = $this->findModelBird($id);
         //$popul_con = PopulationConnect::find()->where(['bird_id' => $bird->bird_id])->deleteAll();
@@ -312,7 +314,7 @@ public function actionCreateEdit($modelName)
         return $this->redirect(['views-birds']);
     }
 
-    public function actionUpdateBird($id)
+public function actionUpdateBird($id)
     {
         $bird = $this->findModelBird($id);
         $link_old=$bird->link;
@@ -368,7 +370,7 @@ public function actionCreateEdit($modelName)
         }
     }
 
-    protected function findModelBird($id)
+protected function findModelBird($id)
     {
         if (($model = Bird::findOne($id)) !== null) 
         {
@@ -390,7 +392,7 @@ public function actionCreateEdit($modelName)
 
     */
 
-    public function actionCreateStaticPage(){
+public function actionCreateStaticPage(){
         $page = new StaticPage();
         if(Yii::$app->request->isPost&&$page->load(Yii::$app->request->post())){
                 $page->save();

@@ -20,6 +20,7 @@ use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -65,14 +66,14 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($sort='bird_name')
     {
          $query = Bird::find();
         $pagination = new Pagination([
             'defaultPageSize' => 3,
             'totalCount' => $query->count(),
         ]);
-        $birds = $query->orderBy('bird_name')
+        $birds = $query->orderBy($sort)
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -86,10 +87,10 @@ class SiteController extends Controller
     /**********************
     ***********************
     *********************/
-    public function actionAllBirds()
+    public function actionAllBirds($sort='bird_name')
     {
         $query = Bird::find();
-        $birds = $query->orderBy('bird_name')
+        $birds = $query->orderBy($sort)
             ->all();
         $display = 0;
         return $this->render('index', [
@@ -109,11 +110,15 @@ class SiteController extends Controller
     *********************/
     public function actionViewsDetails($id)
     {
+        $session = Yii::$app->session;
+        $session->open();
+        $_SESSION['bird_id']=$id;
         if($id!=0)
         {
             $bird = Bird::find()->where(['bird_id' => $id])->one();
             if($bird)
             {
+                $_SESSION['bird_id']=$id;
                 $squad = Squad::find()->where(['squad_id' => $bird->squad_id])->one();
                 if($squad===null){
                     $squad = new Squad();
@@ -189,7 +194,19 @@ class SiteController extends Controller
             }
             else
             {
-                throw new NotFoundHttpException('Нету.');
+                throw new NotFoundHttpException('Пустой запрос.');
             }
+      }
+      public function actionGetCoord(){
+        $session = Yii::$app->session;
+        $session->open();
+        $id =isset($_SESSION['bird_id']) ? $_SESSION['bird_id'] : null;
+        $coord=array();
+        array_push($coord,array('lat' => 123, 'lng' => 123));
+        if($data){
+            $coord = Bird::find()->
+            {'lat' => 123, 'lng' => 123},{'lat' => 123, 'lng' => 123},{'lat' => 123, 'lng' => 123}
+            echo json_encode($coord);
+        }
       }
 }

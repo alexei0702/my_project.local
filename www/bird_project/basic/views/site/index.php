@@ -32,9 +32,33 @@ body{
     </h1>
 </div>
 <?php if($display==0): ?>
-<p class="text-right"><a href="index.php?r=site/index"><button class="bttn-minimal bttn-sm bttn-primary">Показывать по 3</button></a></p> 
+    <div class="btn-group" role="group">
+        <button type="button" class="bttn-simple bttn-sm bttn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Сортировать по
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+                <li><a href="index.php?r=site/all-birds&sort=bird_name"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по имени</button></a></li>
+                <li><a href="index.php?r=site/all-birds&sort=kind_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по роду</button></a></li>
+                <li><a href="index.php?r=site/all-birds&sort=family_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по семейству</button></a></li>
+                <li><a href="index.php?r=site/all-birds&sort=squad_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по отряду</button></a></li>
+        </ul>
+    </div>
+    <a href="index.php?r=site/index" class="btn-right"><button class="bttn-minimal bttn-sm bttn-primary">Показывать по 3</button></a>
 <?php else: ?>
-<p class="text-right"><a href="index.php?r=site/all-birds"><button class="bttn-minimal bttn-sm bttn-primary">Показать лентой</button></a></p>
+    <div class="btn-group" role="group">
+        <button type="button" class="bttn-simple bttn-sm bttn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Сортировать по 
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="index.php?r=site/index&sort=bird_name"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по имени</button></a></li>
+            <li><a href="index.php?r=site/index&sort=kind_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по роду</button></a></li>
+            <li><a href="index.php?r=site/index&sort=family_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по семейству</button></a></li>
+            <li><a href="index.php?r=site/index&sort=&sort=squad_id"><button class="bttn-minimal bttn-sm bttn-primary">Сортировать по отряду</button></a></li>
+        </ul>
+    </div>
+    <a href="index.php?r=site/all-birds" class="btn-right"><button class="bttn-minimal bttn-sm bttn-primary">Показать лентой</button></a>
 <?php endif; ?>
 <div class="row">
 <?php
