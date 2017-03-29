@@ -16,6 +16,7 @@ use app\models\Place;
 use app\models\PopulationConnect;
 use app\models\StatusConnect;
 use app\models\Population;
+use app\models\Coords;
 use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
@@ -201,12 +202,13 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         $session->open();
         $id =isset($_SESSION['bird_id']) ? $_SESSION['bird_id'] : null;
-        $coord=array();
-        array_push($coord,array('lat' => 123, 'lng' => 123));
-        if($data){
-            $coord = Bird::find()->
-            {'lat' => 123, 'lng' => 123},{'lat' => 123, 'lng' => 123},{'lat' => 123, 'lng' => 123}
-            echo json_encode($coord);
+        if($id){
+            $coords = Coords::find()->where(['bird_id'=>$id])->one();
+            $data=array('lat' => $coords->lat, 'lng' => $coords->lng);
+            /*foreach ($coords as $coord) {
+                array_push($data,array('lat' => $coord->lat, 'lng' => $coord->lng));
+            }*/
+            echo json_encode($data);
         }
       }
 }
