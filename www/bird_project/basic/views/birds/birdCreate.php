@@ -97,6 +97,14 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 <button class="btn btn-lg btn-default form-group" id="add">add</button>
 </div> -->
 <div class="clearfix"></div>
+<style type="text/css">
+    #map{
+        height: 325px;
+        width: 100%;
+    }
+</style>
+<div id="map"></div>
+<script src="js/mapCreate.js" defer></script>
 <br>
 <?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>
 <button class="bttn-fill bttn-lg bttn-primary form-group" type="submit">Сохранить</button>

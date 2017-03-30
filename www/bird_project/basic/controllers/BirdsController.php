@@ -309,7 +309,7 @@ public function actionDeleteBird($id)
                     $key->delete();
                 }
         if($bird->link!="noimage.png")
-        unlink($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/'.$bird->link);
+        unlink($_SERVER['DOCUMENT_ROOT'].'/basic/upload/'.$bird->link);
         $bird->delete();
         return $this->redirect(['views-birds']);
     }

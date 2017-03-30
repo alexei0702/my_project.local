@@ -203,11 +203,22 @@ class SiteController extends Controller
         $session->open();
         $id =isset($_SESSION['bird_id']) ? $_SESSION['bird_id'] : null;
         if($id){
-            $coords = Coords::find()->where(['bird_id'=>$id])->one();
-            $data=array('lat' => $coords->lat, 'lng' => $coords->lng);
-            /*foreach ($coords as $coord) {
+            $coords = Coords::find()->where(['bird_id'=>$id])->all();
+            //$data=array('lat' => $coords->lat, 'lng' => $coords->lng);
+            $data = array();
+            $lat=0;
+            $lng=0;
+            $i=0;
+            foreach ($coords as $coord) {
                 array_push($data,array('lat' => $coord->lat, 'lng' => $coord->lng));
-            }*/
+                $lat+=$coord->lat;
+                $lng+=$coord->lng;
+                $i++;
+            }
+            $lat=$lat/$i;
+            $lng=$lng/$i;
+            $center=array('lat' => $lat, 'lng' => $lng);
+            array_push($data, $center);
             echo json_encode($data);
         }
       }
