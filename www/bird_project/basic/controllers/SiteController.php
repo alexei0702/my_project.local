@@ -71,7 +71,7 @@ class SiteController extends Controller
     {
          $query = Bird::find();
         $pagination = new Pagination([
-            'defaultPageSize' => 3,
+            'defaultPageSize' => 6,
             'totalCount' => $query->count(),
         ]);
         $birds = $query->orderBy($sort)

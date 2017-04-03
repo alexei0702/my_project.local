@@ -1,3 +1,22 @@
+$('#form-order-article').on('beforeSubmit', function(e) {
+    var form = $(this);
+    var formData = form.serialize();
+    $.ajax({
+        type:'POST',      
+        url:'/bird_project/basic/web/index.php?r=birds/create-bird',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            alert(data);
+        },
+        error: function () {
+            alert("Something went wrong");
+        }
+    });
+}).on('submit', function(e){
+    e.preventDefault();
+});
+
 // This example creates an interactive map which constructs a polyline based on
 // user clicks. Note that the polyline only appears once its path property
 // contains two LatLng coordinates.
@@ -28,7 +47,6 @@ function addLatLng(event) {
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
   path.push(event.latLng);
-
   // Add a new marker at the new plotted point on the polyline.
   var marker = new google.maps.Marker({
     position: event.latLng,

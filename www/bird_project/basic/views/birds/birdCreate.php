@@ -20,7 +20,7 @@ require_once ('menu.php');
 
 <h1 style="text-align: center;">Создание</h1>
 
-<?php $form = ActiveForm::begin(['options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
+<?php $form = ActiveForm::begin(['id' => 'form-order-article', 'enableClientValidation' => true, 'enableAjaxValidation' => false,'options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
 
 <?= $form->field($bird, 'bird_name')->label('Название'); ?>
 <br>

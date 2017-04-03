@@ -39,7 +39,7 @@ class BirdsController extends Controller
          'roles' => ['?'], 
         ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page','test-js'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
@@ -177,7 +177,6 @@ public function actionCreateEdit($modelName)
     return $this->goBack();
 }
 
-
 public function actionCreateBird()
     {
         $bird=new Bird();
@@ -199,7 +198,11 @@ public function actionCreateBird()
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->redirect(['views-birds']);    
+                $data = "Success!";
+                //return json_encode($data);
+                //$this->redirect(['views-birds']);
+                return json_encode($data);  
+                //return $this->redirect(['views-birds']);    
             }
         }
         $squad = Squad::find()->all();
