@@ -12,7 +12,7 @@ class Coords extends \yii\db\ActiveRecord
 public function rules()
     {
         return [
-            [['lat','lng'], 'required'],
+            [['lat','lng','bird_id'], 'required'],
         ];
     }
 }

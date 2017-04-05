@@ -20,7 +20,7 @@ require_once ('menu.php');
 
 <h1 style="text-align: center;">Создание</h1>
 
-<?php $form = ActiveForm::begin(['id' => 'form-order-article', 'enableClientValidation' => true, 'enableAjaxValidation' => false,'options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
+<?php $form = ActiveForm::begin(['id' => 'form-with-map', 'enableClientValidation' => true, 'enableAjaxValidation' => false,'options' => ['class' => 'form','enctype' => 'multipart/form-data']]) ?>
 
 <?= $form->field($bird, 'bird_name')->label('Название'); ?>
 <br>
@@ -104,7 +104,13 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
     }
 </style>
 <div id="map"></div>
+<?php if($update==1):?>
 <script src="js/mapCreate.js" defer></script>
+<?php endif; ?>
+<?php if($update==2):?>
+<script src="js/mapUpdate.js" defer></script>
+<?php endif; ?>
+<input type="hidden" name="coords" id="coord">
 <br>
 <?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>
 <button class="bttn-fill bttn-lg bttn-primary form-group" type="submit">Сохранить</button>

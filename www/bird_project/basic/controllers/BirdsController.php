@@ -9,6 +9,7 @@ use app\models\Bird;
 use app\models\Squad;
 use app\models\Family;
 use app\models\Kind;
+use app\models\Coords;
 use app\models\Status;
 use app\models\StaticPage;
 use app\models\Place;
@@ -39,7 +40,7 @@ class BirdsController extends Controller
          'roles' => ['?'], 
         ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page','test-js'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
@@ -92,7 +93,6 @@ public function actionViewsBirds()
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
-
     $birds = $query->orderBy('bird_name')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -177,6 +177,20 @@ public function actionCreateEdit($modelName)
     return $this->goBack();
 }
 
+public function saveCoords($path,$id){
+    $path = explode(",",$path);
+    for ($i=0; $i < count($path); $i++) { 
+        $coord = new Coords();
+        $coord->bird_id=$id;
+        $lat = substr($path[$i],1);
+        $coord->lat = $lat;
+        $i++;
+        $lng = substr($path[$i],0,-1);
+        $coord->lng = $lng;
+        $coord->save();
+    }
+}
+
 public function actionCreateBird()
     {
         $bird=new Bird();
@@ -198,11 +212,12 @@ public function actionCreateBird()
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                $data = "Success!";
-                //return json_encode($data);
-                //$this->redirect(['views-birds']);
-                return json_encode($data);  
-                //return $this->redirect(['views-birds']);    
+                $path = Yii::$app->request->post('coords');
+                if($path){
+                    $this->saveCoords($path,$bird->bird_id);
+                }
+                $href = "index.php?r=birds/views-birds";
+                return json_encode($href);  
             }
         }
         $squad = Squad::find()->all();
@@ -211,7 +226,8 @@ public function actionCreateBird()
         $status = Status::find()->all();
         $population = Population::find()->all();
         $place = Place::find()->all();
-        return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place]);
+        $update = 1;
+        return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place,'update' => $update]);
 }
 
     /**********************
@@ -311,6 +327,10 @@ public function actionDeleteBird($id)
         foreach ($st_con as $key) {
                     $key->delete();
                 }
+        $coords = Coords::find()->where(['bird_id' => $bird->bird_id])->all();
+        foreach ($coords as $key) {
+                    $key->delete();
+                }
         if($bird->link!="noimage.png")
         unlink($_SERVER['DOCUMENT_ROOT'].'/basic/upload/'.$bird->link);
         $bird->delete();
@@ -358,7 +378,16 @@ public function actionUpdateBird($id)
                     $status_connect->status_id = $st;
                     $status_connect->save();
                 }
-                return $this->redirect(['views-birds']);
+                $path = Yii::$app->request->post('coords');
+                if($path){
+                    $coords = Coords::find()->where(['bird_id' => $bird->bird_id])->all();
+                    foreach ($coords as $key) {
+                        $key->delete();
+                    }
+                    $this->saveCoords($path,$bird->bird_id);
+                }
+                $href = "index.php?r=birds/views-birds";
+                return json_encode($href);
             }
         } 
         else 
@@ -369,7 +398,8 @@ public function actionUpdateBird($id)
             $status = Status::find()->all();
             $population = Population::find()->all();
             $place = Place::find()->all();
-            return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place]);
+            $update = 2;
+            return $this->render('birdCreate', ['bird' => $bird,'popul_con' => $popul_con,'st_con' => $st_con, 'squad' => $squad, 'family' => $family, 'kind' => $kind, 'status' => $status, 'population' => $population, 'place' => $place, 'update' => $update]);
         }
     }
 

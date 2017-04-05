@@ -3,12 +3,13 @@ $('#form-with-map').on('beforeSubmit', function(e) {
     var coords = [];
     for(var i=0;i<path.getLength();i++)
         coords.push(path.getAt(i)); 
+    var id = getUrlVars()["id"];
     $('#coord').val(coords);
     var form = $(this);
     var formData = form.serialize();
     $.ajax({
         type:'POST',      
-        url:'/basic/web/index.php?r=birds/create-bird',
+        url:'/basic/web/index.php?r=birds/update-bird&id='+id,
         data: formData,
         dataType: 'json',
         success: function (href) {
@@ -58,4 +59,12 @@ function addLatLng(event) {
     title: '#' + path.getLength(),
     map: map
   });
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }

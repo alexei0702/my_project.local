@@ -20,6 +20,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/bttn.min.css">
     <link rel="stylesheet" href="css/btnToTop.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -118,6 +119,7 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 <script src="js/menu.js" defer></script> 
 <script src="js/btnToTop.js" defer></script>
+<script src="js/sweetalert2.min.js" defer></script>
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3jZ1PHeLxCwShhwrvsC_rIvE3LfF-Es8&callback=initMap">
     </script>

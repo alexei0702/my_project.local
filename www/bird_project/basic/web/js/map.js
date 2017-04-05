@@ -2,7 +2,7 @@ var marker;
 function initMap() {  
   $.ajax({
     type:'POST',      
-    url:'/bird_project/basic/web/index.php?r=site/get-coord',
+    url:'/basic/web/index.php?r=site/get-coord',
     dataType: 'json',     
     success:function(data){   
       var map = new google.maps.Map(document.getElementById('map'), {

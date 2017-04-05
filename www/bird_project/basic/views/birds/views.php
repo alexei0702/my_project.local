@@ -55,8 +55,8 @@ if($kind===null){
             <td><?= Html::encode ("{$family->family_name} - {$family->family_name_lat}") ?> </td>
             <td><?= Html::encode ("{$kind->kind_name} - {$kind->kind_name_lat}") ?> </td>
             <td>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="/bird_project/basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="basic/web/index.php?r=birds%2Fupdate-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Update" aria-label="Update" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="basic/web/index.php?r=birds%2Fdelete-bird&amp;id=<?=$bird->bird_id?>&amp;name=Bird" title="Delete" aria-label="Delete" data-confirm="Are you sure you want to delete this item?" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
 <?php $i++;
