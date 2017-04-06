@@ -57,12 +57,13 @@ if($kind===null){
 ?>
 <div class="col-lg-4 text">
             <a href='index.php?r=site/views-details&id=<?=$bird->bird_id?>'>
-            <img src="<?= '/basic/upload/'.$bird->link?>" width="300" class="img-rounded" alt="111"></a>
+            <img src="<?= '/basic/upload/'.$bird->link?>" width="300" height="300" class="img-rounded" alt="111">
             <br>
             <?= Html::encode ("{$bird->bird_name} - {$bird->bird_name_lat}") ?><br>
             <?= Html::encode ("{$squad->squad_name} - {$squad->squad_name_lat}") ?> <br>
             <?= Html::encode ("{$family->family_name} - {$family->family_name_lat}") ?><br>
             <?= Html::encode ("{$kind->kind_name} - {$kind->kind_name_lat}") ?> <br>
+            </a>
 </div>
 <?php 
  endforeach;

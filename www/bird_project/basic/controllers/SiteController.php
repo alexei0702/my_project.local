@@ -173,7 +173,7 @@ class SiteController extends Controller
                 $num = $q->count();
                 if ($num>0) { 
                         $pagination = new Pagination([
-                            'defaultPageSize' => 3,
+                            'defaultPageSize' => 6,
                             'totalCount' => $num,
                             ]);
                         $birds = $q->orderBy('bird_name')

@@ -9,7 +9,7 @@ $this->title = 'Птичка';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1 style="text-align: center;">Птичка</h1>
+<h1 style="text-align: center;"><?=Html::encode ("{$bird->bird_name}")?></h1>
 <br>
 <div class="col-lg-4">
 <img src="<?= '/basic/upload/'.$bird->link?>" width="400" class="img-rounded img-responsive" alt="111">

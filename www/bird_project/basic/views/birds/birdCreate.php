@@ -110,6 +110,10 @@ echo $form->field($bird, 'habitat',['inputOptions' => ['class' => 'textarea']])-
 <?php if($update==2):?>
 <script src="js/mapUpdate.js" defer></script>
 <?php endif; ?>
+<br>
+<button type="button" id="map-clear">Очистить карту</button>
+<button type="button" id="erase-last-marker">Удалить последний маркер</button>
+<br>
 <input type="hidden" name="coords" id="coord">
 <br>
 <?= $form->field($bird, 'link')->fileInput()->label('Выберите фото птицы') ?>
