@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
   </tr>
   <tr>
     <td>
-        <img src="..." alt="Photo Moya">
+        <img src="images/Ефимов.jpg" width="340" height="400" alt="Photo Menya">
     </td>
     <td>
         <p>Ведущий программист Ефимов Алексей Павлович</p><p> студент группы 05450</p>
