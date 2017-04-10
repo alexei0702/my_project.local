@@ -5,7 +5,7 @@ use app\models\Status;
 use app\models\Population;
 use app\models\Place;
 
-$this->title = 'Птичка';
+$this->title = Html::encode ("{$bird->bird_name}");
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

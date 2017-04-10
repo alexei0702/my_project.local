@@ -16,9 +16,6 @@ $this->title = 'Birds System';
 </style>
 
 <div class="site-index">
-    <div class="jumbotron">
-        <h1>Режим разработчика!</h1>
-    </div>
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4 alert alert-info">

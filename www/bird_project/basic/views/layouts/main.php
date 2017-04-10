@@ -1,4 +1,4 @@
-<?php
+    <?php
 /* @var $this \yii\web\View */
 /* @var $content string */
 use yii\helpers\Html;
@@ -38,6 +38,15 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items' => [
+            ['label' => 'О проекте',
+            'url' => ['site/about-project']],
+            ['label' => 'О нас',
+            'url' => ['site/about-us']],
+            ]
+        ]);
     if(!Yii::$app->user->isGuest)
     {
     echo Nav::widget([

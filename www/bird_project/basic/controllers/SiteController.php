@@ -102,13 +102,18 @@ class SiteController extends Controller
     /**********************
     ***********************
     *********************/
-    public function actionAbout()
+    public function actionAboutUs()
     {
-         return $this->render('info');
+         return $this->render('aboutUs');
     }
     /**********************
     ***********************
     *********************/
+    public function actionAboutProject()
+    {
+         return $this->render('aboutProject');
+    }
+    /*********************/
     public function actionViewsDetails($id)
     {
         $session = Yii::$app->session;
