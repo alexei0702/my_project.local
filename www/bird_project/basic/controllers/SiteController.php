@@ -174,7 +174,7 @@ class SiteController extends Controller
                     throw new NotFoundHttpException('Слишком длинный поисковый запрос.');
              } 
              else { 
-                $q = Bird::find()->orWhere(['like','bird_name', $query])->orWhere(['like','bird_name_lat',$query])->orWhere(['like','propagation',$query])->orWhere(['like','migration',$query])->orWhere(['like','habitat',$query]);
+                $q = Bird::find()->orWhere(['like','bird_name', $query])->orWhere(['like','bird_name_lat',$query]);
                 $num = $q->count();
                 if ($num>0) { 
                         $pagination = new Pagination([
@@ -200,7 +200,7 @@ class SiteController extends Controller
             }
             else
             {
-                throw new NotFoundHttpException('Пустой запрос.');
+                return $this->redirect(['index']);
             }
       }
       public function actionGetCoord(){
