@@ -10,7 +10,7 @@ require_once ('menu.php');
 <h1 style="text-align: center;">Птичка</h1>
 <br>
 <div class="col-lg-4">
-<img src="<?= '/basic/upload/'.$bird->link?>" width="400" class="img-rounded img-responsive" alt="111">
+<img src="<?= '/bird_project/basic/upload/'.$bird->link?>" width="400" class="img-rounded img-responsive" alt="111">
 </div>
 <div class="col-lg-8">
 <table class="table table-striped table-hover">

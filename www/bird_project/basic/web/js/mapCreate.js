@@ -8,7 +8,7 @@ $('#form-with-map').on('beforeSubmit', function(e) {
     var formData = form.serialize();
     $.ajax({
         type:'POST',      
-        url:'/basic/web/index.php?r=birds/create-bird',
+        url:'/bird_project/basic/web/index.php?r=birds/create-bird',
         data: formData,
         dataType: 'json',
         success: function (href) {

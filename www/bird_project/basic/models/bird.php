@@ -22,14 +22,14 @@ class Bird extends \yii\db\ActiveRecord
     public function create()
     {
         if ($this->validate()) {
-            if(is_string($this->link))
+            if($this->link==null)
             {
                 $this->link = "noimage.png";
                 return true;
             }
             else
             {
-                $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
+                $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
                 $this->link=time()."_".$this->link->baseName . '.' . $this->link->extension;
                 /*chmod($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension,0755);*/
                 return true;
@@ -48,7 +48,7 @@ class Bird extends \yii\db\ActiveRecord
                 return true;
             }
             else{
-            $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
+            $this->link->saveAs($_SERVER['DOCUMENT_ROOT'].'/bird_project/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension);
             $this->link=time()."_".$this->link->baseName . '.' . $this->link->extension;
             /*chmod($_SERVER['DOCUMENT_ROOT'].'/basic/upload/' .time()."_". $this->link->baseName . '.' . $this->link->extension,0755);*/
             return true;
