@@ -28,7 +28,7 @@ function initMap() {
       marker.addListener('click', toggleBounce);*/
     },
     error:function(){
-      alert("Error getting data!");
+      alert("Координаты для этой особи, увы, ещё не занесены в базу!");
     }
   });
 

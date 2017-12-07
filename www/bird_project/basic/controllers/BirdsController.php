@@ -36,11 +36,11 @@ class BirdsController extends Controller
         [ 
         
         [ 'allow' => true, 
-         'actions' => ['login'], 
+         'actions' => ['login','get-bird','auth'], 
          'roles' => ['?'], 
         ],
 
-        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page'], 
+        [ 'actions' => ['index','create','create-bird','logout','views-birds','create-edit','views-details','create-static-page','get-bird','auth'], 
         'allow' => true, 
         'roles' => ['@'], 
         ], 
@@ -90,7 +90,7 @@ public function actionViewsBirds()
     $query = Bird::find();
 
     $pagination = new Pagination([
-            'defaultPageSize' => 5,
+            'defaultPageSize' => 10,
             'totalCount' => $query->count(),
         ]);
     $birds = $query->orderBy('bird_name')
@@ -425,7 +425,7 @@ protected function findModelBird($id)
 
     */
 
-public function actionCreateStaticPage(){
+    public function actionCreateStaticPage(){
         $page = new StaticPage();
         if(Yii::$app->request->isPost&&$page->load(Yii::$app->request->post())){
                 $page->save();
@@ -436,5 +436,42 @@ public function actionCreateStaticPage(){
                 'page' => $page,
             ]);
     }
+    public function actionGetBird(){
+        // if(Yii::$app->request->post()){
+        //     $str = Yii::$app->request->post('str');
+        //     if(mb_strlen($str) < 3 || mb_strlen($str) > 256){
+        //         return;
+        //     }
+        //     $query = Bird::find()->where(['like','bird_name',$str])->all();
+        //     $arr = array();
+        //     foreach ($query as $value) {
+        //         $arr[]=$value->bird_name;
+        //     }
+        //     if(count($arr) > 0){
+        //         return json_encode($arr);
+        //     }
+        // }
+        // return;
+        $query = Bird::find()->all();
+        $arr = array();
+        foreach ($query as $value) {
+            $arr['birds'][]=$value->bird_name;
+        }
+        return json_encode($arr);
+    }
+    public function actionAuth(){
+        if (Yii::$app->request->isPost) {
+            $user = User::find()->where(['username' => Yii::$app->request->post('username'),'password' => Yii::$app->request->post('password')])->one();
+            if($user)
+                return true;
+            else
+                return false;
+        }
+        return false;
+    }
+    // public function beforeAction($action) {
+    //     $this->enableCsrfValidation = ($action->id !== "ДЕЙСТВИЕ"); 
+    //     return parent::beforeAction($action);
+    // }
 }
 ?>
