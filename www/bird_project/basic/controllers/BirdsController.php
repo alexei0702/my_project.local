@@ -463,11 +463,11 @@ protected function findModelBird($id)
         if (Yii::$app->request->isPost) {
             $user = User::find()->where(['username' => Yii::$app->request->post('username'),'password' => Yii::$app->request->post('password')])->one();
             if($user)
-                return true;
+                return json_encode(true);
             else
-                return false;
+                return json_encode(false);
         }
-        return false;
+        return json_encode(false);
     }
     // public function beforeAction($action) {
     //     $this->enableCsrfValidation = ($action->id !== "ДЕЙСТВИЕ"); 
