@@ -469,9 +469,11 @@ protected function findModelBird($id)
         }
         return json_encode(false);
     }
-    // public function beforeAction($action) {
-    //     $this->enableCsrfValidation = ($action->id !== "ДЕЙСТВИЕ"); 
-    //     return parent::beforeAction($action);
-    // }
+    public function beforeAction($action) {
+        if($action->id == 'auth'){
+            $this->enableCsrfValidation = false; 
+        }
+        return parent::beforeAction($action);
+    }
 }
 ?>

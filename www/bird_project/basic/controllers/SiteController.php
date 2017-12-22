@@ -99,6 +99,10 @@ class SiteController extends Controller
             'display' => $display,
         ]);
     }
+
+    public function actionBuklet(){
+        return $this->render('buklet');
+    }
     /**********************
     ***********************
     *********************/
